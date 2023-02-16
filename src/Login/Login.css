@@ -1,0 +1,25 @@
+/* Set variables for all modes */
+:root {
+    --ion-background-color: #F5ECE2;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif;
+}
+
+.login-btn {
+    padding: 5px;
+    --background: #738693;
+}
+.register-btn {
+    --background: #7C9CAB;
+}
+
+.icon-btn{
+    --background: #00ff00;
+}
+
+.centerRowItem{
+    justify-content: space-evenly
+}
+
+.centerText{
+    text-align: center;
+}

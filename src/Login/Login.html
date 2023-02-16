@@ -2,9 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+
+    <link rel="stylesheet" href="Login.css">
+
 </head>
 <body>
 
+<ion-app>
+
+    <ion-grid>
+        <ion-row>
+            <ion-img src="Image/loginImage.png" ></ion-img>
+        </ion-row>
+
+        <ion-row class="centerRowItem">
+            <h1>My Bills</h1>
+        </ion-row>
+
+        <ion-row>
+            <div class="centerText">
+                <p>Billsy is a amazing tool to help you organise
+                    your bill’s</p>
+            </div>
+
+        </ion-row>
+
+
+
+        <ion-row class="centerRowItem">
+            <ion-button class="login-btn" id="open-login" expand="block">Login</ion-button>
+        </ion-row>
+
+
+        <ion-row class="centerRowItem">
+            <ion-button class="register-btn" id="open-modal" expand="block">Register</ion-button>
+        </ion-row>
+
+    </ion-grid>
+
+
+    <ion-content>
+
+        <ion-content class="my-custom-padding">
+
+
+        </ion-content>
+
+
+        <ion-modal trigger="open-login" initial-breakpoint="0.50">
+
+            <h1>Let's login</h1>
+
+
+            <ion-content>
+                <ion-list>
+
+
+                    <ion-item fill="solid">
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input type="email" ngModel email></ion-input>
+                    </ion-item>
+
+
+                    <ion-item>
+                        <ion-label position="floating">Password input</ion-label>
+                        <ion-input type="password"></ion-input>
+                    </ion-item>
+                    <ion-button id="loginUser">Login</ion-button>
+
+                    <p>Or continue with</p>
+
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button class="icon-btn" id="apple-login" expand="block">
+                                    <ion-icon name="logo-apple"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button class="icon-btn" id="google-login" expand="block">
+                                <ion-icon name="logo-google"></ion-icon>
+                            </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button class="icon-btn" id="facebook-login" expand="block">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+
+
+
+
+
+                </ion-list>
+
+            </ion-content>
+        </ion-modal>
+
+
+    </ion-content>
+
+
+</ion-app>
+
 </body>
+
+<script src="Login.js"></script>
+
 </html>
