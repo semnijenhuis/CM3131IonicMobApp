@@ -56,58 +56,76 @@
         </ion-content>
 
 
-        <ion-modal trigger="open-login" initial-breakpoint="0.50">
+        <ion-modal trigger="open-login" initial-breakpoint="0.60" class="modalStyle">
 
-            <h1>Let's login</h1>
-
-
-            <ion-content>
-                <ion-list>
+            <div class="padding">
 
 
-                    <ion-item fill="solid">
-                        <ion-label position="floating">Email</ion-label>
-                        <ion-input type="email" ngModel email></ion-input>
-                    </ion-item>
 
-
-                    <ion-item>
-                        <ion-label position="floating">Password input</ion-label>
-                        <ion-input type="password"></ion-input>
-                    </ion-item>
-                    <ion-button id="loginUser">Login</ion-button>
-
-                    <p>Or continue with</p>
-
+                <ion-content class="modalStyleItem">
                     <ion-grid>
-                        <ion-row>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="apple-login" expand="block">
-                                    <ion-icon name="logo-apple"></ion-icon>
-                                </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="google-login" expand="block">
-                                <ion-icon name="logo-google"></ion-icon>
-                            </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="facebook-login" expand="block">
-                                    <ion-icon name="logo-facebook"></ion-icon>
-                                </ion-button>
-                            </ion-col>
+
+                        <ion-row class="centerRowItem">
+                            <h1>Let's login</h1>
                         </ion-row>
+
+                        <ion-row>
+                            <ion-item fill="solid">
+                                <ion-label position="floating">Email</ion-label>
+                                <ion-input type="email" ngModel email></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-item>
+                                <ion-label position="floating">Password</ion-label>
+                                <ion-input type="password"></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-row class="centerRowItem">
+                            <ion-button id="loginUser">Login</ion-button>
+                        </ion-row>
+
+                        <ion-row class="centerRowItem">
+                            <p>Or continue with</p>
+                        </ion-row>
+
+
+
+
+
+                            <ion-row>
+                                <ion-col>
+                                    <ion-button class="icon-btn" id="apple-login" expand="block">
+                                        <ion-icon name="logo-apple"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-button class="icon-btn" id="google-login" expand="block">
+                                        <ion-icon name="logo-google"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-button class="icon-btn" id="facebook-login" expand="block">
+                                        <ion-icon name="logo-facebook"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+
+
+
+
+
+
+
+
                     </ion-grid>
 
+                </ion-content>
+            </div>
 
 
-
-
-
-
-                </ion-list>
-
-            </ion-content>
         </ion-modal>
 
 
@@ -119,5 +137,8 @@
 </body>
 
 <script src="Login.js"></script>
+<script src="../App.js"></script>
+<script src="../Home/Home.js"></script>
+<script  src="../User.js"></script>
 
 </html>

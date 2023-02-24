@@ -1,10 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+
+    <title>Document</title>
+    <link rel="stylesheet" href="Home.css">
+
+
 </head>
-<body>
+<body onload="updateHeader()">
+
+<ion-app>
+
+    <ion-content>
+        <div class="shadowTest">
+            <h3 align="center" id="lbl-greeting">Hi, @name</h3>
+            <h6 align="center">Your total balance is</h6>
+            <h1 align="center" id="lbl-balance">@amount</h1>
+            <p align="center">Amount needed</p>
+            <h3 align="center" id="lbl-debt">@amountNeeded</h3>
+        </div>
+
+    </ion-content>
+
+    <ion-content>
+        <p>Up coming bills</p>
+        <ion-button id="refresh">refresh</ion-button>
+        <ion-button id="logOut">logout</ion-button>
+
+    </ion-content>
+
+
+    <ion-tabs class="">
+
+        <ion-tab-bar class="" slot="bottom">
+
+            <ion-tab-button class="backgroundColor" tab="settings">
+                <ion-icon name="settings-outline"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button class="backgroundColor" tab="Home">
+                <ion-icon name="home"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button class="backgroundColor" tab="library">
+                <ion-icon name="library"></ion-icon>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+
+
+</ion-app>
 
 </body>
+
+<script src="Home.js"></script>
+<script src="../User.js"></script>
+
 </html>

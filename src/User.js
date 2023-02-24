@@ -1,27 +1,16 @@
 class User {
 
-    #username;
-    #password;
+    username;
+    password;
+    balance = 162;
+    debt =10;
 
 
     constructor(username, password) {
-        this.#username = username;
-        this.#password = password;
+        this.username = username;
+        this.password = password;
     }
 
-    get username() {
-        return this._username;
-    }
 
-    set username(username) {
-        this._username = username;
-    }
 
-    get password() {
-        return this._password;
-    }
-
-    set password(password) {
-        this._password = password;
-    }
 }

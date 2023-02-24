@@ -1,0 +1,36 @@
+ion-content.bottom-shadow {
+    --background: #7C9CAB;
+    /*--placeholder-color: #ff0000;*/
+    /*box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.5);*/
+}
+.centerRowItem{
+    justify-content: space-evenly
+}
+
+.shadow {
+    --placeholder-color: #ff0000;
+    --background: #a7d9f1;
+    box-shadow: 0px 100px 100px 0px rgba(0, 0, 0, 0.5);
+}
+
+.card{
+    --background:#ff0000;
+    --color: #5e00f5;
+}
+
+.shadowTest{
+    background: #F7ECE1;
+    box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.5);
+}
+
+.menuDiv{
+
+}
+.backgroundColor{
+    background: #F7ECE1;
+
+}
+
+.topBar{
+    max-height: 250px;
+}

@@ -23,3 +23,14 @@
 .centerText{
     text-align: center;
 }
+
+.padding{
+    padding: 10px;
+    height: 380px;
+
+}
+
+.modalStyle{
+    padding: 10px;
+
+}
