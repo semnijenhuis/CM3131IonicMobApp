@@ -19,40 +19,129 @@
 
 <ion-app>
 
-    <ion-content>
-        <div class="shadowTest">
-            <h3 align="center" id="lbl-greeting">Hi, @name</h3>
-            <h6 align="center">Your total balance is</h6>
-            <h1 align="center" id="lbl-balance">@amount</h1>
-            <p align="center">Amount needed</p>
-            <h3 align="center" id="lbl-debt">@amountNeeded</h3>
-        </div>
 
-    </ion-content>
-
-    <ion-content>
-        <p>Up coming bills</p>
-        <ion-button id="refresh">refresh</ion-button>
-        <ion-button id="logOut">logout</ion-button>
-
-    </ion-content>
+    <ion-tabs id="tb-menu" selectedTab="tb-btn-home">
 
 
-    <ion-tabs class="">
+        <ion-tab id="tb-btn-home" tab="Home">
+            <ion-content class="homeScreen">
+
+                <ion-card class="topBarHeader">
+                    <ion-card-header>
+                        <ion-card-title align="center" id="lbl-greeting">Hi, @name</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <h6 align="center">Your total balance is</h6>
+                        <h1 align="center" id="lbl-balance">@amount</h1>
+                        <p align="center">Amount needed</p>
+                        <h3 align="center" id="lbl-debt">@amountNeeded</h3>
+                    </ion-card-content>
+                </ion-card>
+
+                <h3>Upcoming bills</h3>
+
+                <ion-card class="billCards">
+                    <ion-card-header>
+                        <ion-card-title>Netflix</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <h3>Amount</h3>
+                        <h2>€14,23</h2>
+                        <h3></h3>
+                        <h3>01-02-2023</h3>
+                    </ion-card-content>
+                </ion-card>
+
+
+                <p>Up coming bills</p>
+                <ion-button id="refresh">refresh</ion-button>
+                <ion-button id="logOut">logout</ion-button>
+<!--                <ion-button id="logOut2">Say Hello</ion-button>-->
+
+            </ion-content>
+        </ion-tab>
+
+        <ion-tab id="tb-btn-settings" tab="Settings">
+            <ion-content>
+                <h1>settings</h1>
+            </ion-content>
+
+        </ion-tab>
+
+        <ion-tab id="tb-btn-settings" tab="Bills">
+            <ion-content class="billScreen">
+
+
+                <ion-card class="billsTopBar">
+                    <ion-card-header>
+                        <ion-card-title align="center">Bills</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <h6 align="center">On your account</h6>
+                        <h1 align="center" id="bills-balance">@amount</h1>
+                        <h6 align="center">Open to pay</h6>
+                        <h1 align="center" id="bills-debt">@amount</h1>
+                    </ion-card-content>
+                </ion-card>
+
+
+                <div class="billList">
+
+                    <ion-card class="contentCard">
+                        <ion-card-content>
+
+                            <ion-list id="billList">
+                                <ion-item>
+                                    <ion-toggle id="logOut2">
+<!--                                        <h2>Netflix </h2>-->
+<!--                                        <span class="item-details">-->
+<!--                                        <span class="item-date">April 2023</span>-->
+<!--                                        <span class="item-price">€15</span>-->
+<!--                                        </span>-->
+                                    </ion-toggle>
+                                </ion-item>
+
+                            </ion-list>
+
+                        </ion-card-content>
+
+                    </ion-card>
+
+
+                </div>
+
+
+            </ion-content>
+
+        </ion-tab>
+
 
         <ion-tab-bar class="" slot="bottom">
 
-            <ion-tab-button class="backgroundColor" tab="settings">
+            <ion-tab-button class="backgroundColor" tab="Settings">
                 <ion-icon name="settings-outline"></ion-icon>
             </ion-tab-button>
+
             <ion-tab-button class="backgroundColor" tab="Home">
                 <ion-icon name="home"></ion-icon>
             </ion-tab-button>
-            <ion-tab-button class="backgroundColor" tab="library">
+
+
+            <ion-tab-button class="backgroundColor" tab="Bills">
                 <ion-icon name="library"></ion-icon>
             </ion-tab-button>
+
+
         </ion-tab-bar>
+
     </ion-tabs>
+
+
+    <!--    <ion-tabs class="">-->
+
+
+    <!--    </ion-tabs>-->
 
 
 </ion-app>
@@ -61,5 +150,6 @@
 
 <script src="Home.js"></script>
 <script src="../User.js"></script>
+<script src="../Bill.js"></script>
 
 </html>
