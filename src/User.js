@@ -2,8 +2,8 @@ class User {
 
     username;
     password;
-    balance = 162;
-    debt =10;
+    balance = 0;
+    debt = 0;
 
 
 

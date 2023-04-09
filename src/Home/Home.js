@@ -18,7 +18,7 @@ filterButton.addEventListener("click", startFilter);
 billCard.addEventListener("click", printTest);
 refreshButton.addEventListener("click",updateHeader);
 logOut.addEventListener("click",deleteUser);
-toggle.addEventListener("click", addDebt)
+toggle.addEventListener("click", printTest)
 
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 let debt = logedInUser.debt;
@@ -53,6 +53,11 @@ function updateBillList(){
         let ionToggle = document.createElement("ion-toggle");
         ionToggle.setAttribute("id", "logOut" + i);
 
+        if(bill.payed) {
+            ionToggle.checked = true;
+        }
+
+
         // create the h2 element and set its text content
         let h2 = document.createElement("h2");
         h2.textContent = bill.name;
@@ -77,7 +82,7 @@ function updateBillList(){
 
 
         ionToggle.addEventListener("click", function(event) {
-            addDebt(event, bill.amount);
+            addDebt(event, logedInUser, bill);
         });
 
         // append the h2 and item-details to the ion-toggle
@@ -98,16 +103,26 @@ function updateBillList(){
 }
 
 
-function addDebt(event, amount) {
+function addDebt(event, logedInUser, bill,) {
     const toggleElement = event.target;
 
+
     console.log(debt)
-    console.log(amount)
+    console.log(bill.amount)
 
     if (toggleElement.checked) {
-        debt = debt -amount;
+        debt = debt -bill.amount;
+        bill.payed = false;
+
+        logedInUser.debt = debt;
+        localStorage.setItem("user", JSON.stringify(logedInUser));
+
+
     } else {
-        debt = debt +amount;
+        debt = debt +bill.amount;
+        bill.payed = true;
+        logedInUser.debt = debt;
+        localStorage.setItem("user", JSON.stringify(logedInUser));
     }
 
     billsDebt.innerText = debt
