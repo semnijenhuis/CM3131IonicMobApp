@@ -20,11 +20,14 @@
 <ion-app>
 
 
+
     <ion-tabs id="tb-menu" selectedTab="tb-btn-home">
 
 
         <ion-tab id="tb-btn-home" tab="Home">
+
             <ion-content class="homeScreen">
+
 
                 <ion-card class="topBarHeader">
                     <ion-card-header>
@@ -40,23 +43,67 @@
 
                 <h3>Upcoming bills</h3>
 
-                <ion-card class="billCards">
-                    <ion-card-header>
-                        <ion-card-title>Netflix</ion-card-title>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <h3>Amount</h3>
-                        <h2>€14,23</h2>
-                        <h3></h3>
-                        <h3>01-02-2023</h3>
-                    </ion-card-content>
-                </ion-card>
+<!--                <div class="container">-->
+                <ion-scroll class="container" scrollX="true">
+                    <ion-list >
+                        <ion-item class="listList">
+                            <ion-card id="itemPressed" class="billCards">
+                                <ion-card-header>
+                                    <ion-card-title>Netflix</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <h3>Amount</h3>
+                                    <h2>€14,23</h2>
+                                    <h3>01-02-2023</h3>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <ion-card class="billCards">
+                                <ion-card-header>
+                                    <ion-card-title>Spotify</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <h3>Amount</h3>
+                                    <h2>€9,99</h2>
+                                    <h3>05-02-2023</h3>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <ion-card class="billCards">
+                                <ion-card-header>
+                                    <ion-card-title>Amazon Prime</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <h3>Amount</h3>
+                                    <h2>€7,99</h2>
+                                    <h3>10-02-2023</h3>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <ion-card class="billCards">
+                                <ion-card-header>
+                                    <ion-card-title>Amazon Prime</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <h3>Amount</h3>
+                                    <h2>€7,99</h2>
+                                    <h3>10-02-2023</h3>
+                                </ion-card-content>
+                            </ion-card>
+
+
+
+                        </ion-item>
+                    </ion-list>
+                </ion-scroll>
+<!--                </div>-->
 
 
                 <p>Up coming bills</p>
+                <ion-button  id="startFilter" expand="block">Start filtering</ion-button>
                 <ion-button id="refresh">refresh</ion-button>
                 <ion-button id="logOut">logout</ion-button>
-<!--                <ion-button id="logOut2">Say Hello</ion-button>-->
+
 
             </ion-content>
         </ion-tab>

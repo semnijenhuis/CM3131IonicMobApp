@@ -4,6 +4,8 @@ const balanceName = document.getElementById('lbl-balance');
 const debtName = document.getElementById('lbl-debt')
 const refreshButton = document.getElementById('refresh');
 const logOut = document.getElementById('logOut');
+const billCard = document.getElementById('itemPressed')
+const filterButton = document.getElementById('startFilter');
 
 
 // Bills screen
@@ -12,13 +14,22 @@ const billsDebt = document.getElementById('bills-debt')
 const toggle = document.getElementById('logOut2');
 const billList = document.getElementById('billList')
 
-
+filterButton.addEventListener("click", startFilter);
+billCard.addEventListener("click", printTest);
 refreshButton.addEventListener("click",updateHeader);
 logOut.addEventListener("click",deleteUser);
 toggle.addEventListener("click", addDebt)
 
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 let debt = logedInUser.debt;
+
+function startFilter(){
+    window.location.href = "Filtering/Filtering.html";
+}
+
+function printTest(){
+    console.log("bill card pressed")
+}
 
 console.log("Home file started")
 // const bill1 = new Bill("Netflix",33.32,"02-03-2023");
@@ -128,5 +139,10 @@ function deleteUser() {
     localStorage.removeItem('user');
     window.location = "../Index.html";
 }
+
+
+
+
+
 
 

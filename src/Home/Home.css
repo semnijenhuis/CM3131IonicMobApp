@@ -19,7 +19,7 @@
 
 .billCards {
     max-width: 170px;
-    /*--background:#F7ECE1;*/
+    max-height: 150px;
 
 }
 ion-content {
@@ -72,8 +72,33 @@ ion-content {
 }
 
 
-.contentCard {
+.container {
+
     display: flex;
-    flex-direction: column;
+    overflow-x: auto;
+    width: 100vw;
+    /*height: 200px;*/
+}
+
+.billCards {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 300px;
+}
+
+ion-scroll {
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+ion-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.listList{
+    --background: #F7ECE1;
 }
