@@ -21,25 +21,21 @@
 
 
 
+
     <ion-tabs id="tb-menu" selectedTab="tb-btn-home">
 
 
         <ion-tab id="tb-btn-home" tab="Home">
 
+
+            <ion-toolbar class="modalHead">
+                <p align="center" id="lbl-greeting">Hi, @name</p>
+                <p align="center">Your total balance is</p>
+                <p align="center" id="lbl-balance">@amount</p>
+            </ion-toolbar>
+
+
             <ion-content class="homeScreen">
-
-
-                <ion-card class="topBarHeader">
-                    <ion-card-header>
-                        <ion-card-title align="center" id="lbl-greeting">Hi, @name</ion-card-title>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <h6 align="center">Your total balance is</h6>
-                        <h1 align="center" id="lbl-balance">@amount</h1>
-                        <p align="center">Amount needed</p>
-                        <h3 align="center" id="lbl-debt">@amountNeeded</h3>
-                    </ion-card-content>
-                </ion-card>
 
                 <h3>Upcoming bills</h3>
 
@@ -109,6 +105,8 @@
         </ion-tab>
 
         <ion-tab id="tb-btn-settings" tab="Settings">
+
+
             <ion-content>
                 <h1>settings</h1>
             </ion-content>
@@ -116,33 +114,44 @@
         </ion-tab>
 
         <ion-tab id="tb-btn-settings" tab="Bills">
+
+            <ion-toolbar class="headerBills">
+                <p align="center">Bills</p>
+
+                <ion-grid align="center">
+                    <ion-row>
+
+
+                        <ion-col>
+                            <p >Income</p>
+                            <p >Bills</p>
+                            <p >Result</p>
+                        </ion-col>
+
+                        <ion-col>
+                            <p  id="bills-income">@amount</p>
+                            <p  id="bills-bills">@amount</p>
+                            <p id="bills-result">@amount</p>
+
+                        </ion-col>
+
+                    </ion-row>
+                </ion-grid>
+
+
+            </ion-toolbar>
+
             <ion-content class="billScreen">
 
 
-                <ion-card class="billsTopBar">
-                    <ion-card-header>
-                        <ion-card-title align="center">Bills</ion-card-title>
-                    </ion-card-header>
-
-                    <ion-card-content>
-                        <h6 align="center">On your account</h6>
-                        <h1 align="center" id="bills-balance">@amount</h1>
-                        <h6 align="center">Open to pay</h6>
-                        <h1 align="center" id="bills-debt">@amount</h1>
-                    </ion-card-content>
-                </ion-card>
 
 
-                <div class="billList">
 
                     <ion-card class="contentCard">
                         <ion-card-content>
 
                             <ion-list id="billList">
-                                <ion-item>
-                                    <ion-toggle id="logOut2"> </ion-toggle>
 
-                                </ion-item>
 
                             </ion-list>
 
@@ -150,8 +159,21 @@
 
                     </ion-card>
 
+                <ion-card class="contentCard">
+                    <ion-card-content>
 
-                </div>
+                        <ion-list id="bill-incomeList">
+
+
+                        </ion-list>
+
+                    </ion-card-content>
+
+                </ion-card>
+
+
+
+
 
 
             </ion-content>
