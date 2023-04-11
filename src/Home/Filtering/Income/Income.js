@@ -4,8 +4,15 @@ const incomeIncomeList = document.getElementById('income-incomeList')
 const incomeAddBillButton = document.getElementById('income-addBill-btn')
 
 const modal = document.getElementById('income-newBill-modal')
+const editModal = document.getElementById('income-edit-newBill-modal')
+
 const incomeCancelButton = document.getElementById('income-cancel-btn')
 const incomeConfirmButton = document.getElementById('income-confirm-btn')
+
+
+const incomeEditCancelButton = document.getElementById('income-edit-cancel-btn')
+const incomeEditConfirmButton = document.getElementById('income-edit-confirm-btn')
+
 
 const incomeBillNameInput = document.getElementById('income-bill-name');
 const incomeBillAmountInput = document.getElementById('income-bill-amount');
@@ -13,10 +20,19 @@ const incomeBillDateInput = document.getElementById('income-bill-date');
 const incomeBillCategoryInput = document.getElementById('income-bill-category');
 
 
-incomeAddBillButton.addEventListener("click", createNewBill)
+const incomeBillEditIDInput = document.getElementById('income-edit-bill-id');
+const incomeBillEditNameInput = document.getElementById('income-edit-bill-name');
+const incomeBillEditAmountInput = document.getElementById('income-edit-bill-amount');
+const incomeBillEditDateInput = document.getElementById('income-edit-bill-date');
+const incomeBillEditCategoryInput = document.getElementById('income-edit-bill-category');
+
 
 incomeConfirmButton.addEventListener("click", billConfirmed)
 incomeCancelButton.addEventListener("click", billCanceld)
+
+
+incomeEditConfirmButton.addEventListener("click", billEditConfirm)
+incomeEditCancelButton.addEventListener("click", editNillCanceld)
 
 function billConfirmed(){
 
@@ -33,6 +49,30 @@ function billConfirmed(){
 
 }
 
+function billEditConfirm(){
+
+
+    newBill = new Bill(incomeBillEditNameInput.value,incomeBillEditAmountInput.value,incomeBillEditDateInput.value,incomeBillEditCategoryInput.value)
+    newBill.id = incomeBillEditIDInput.value;
+
+    editBill(newBill)
+
+    localStorage.setItem("user", JSON.stringify(logedInUser));
+
+
+    refreshIncomeList()
+
+    editModal.dismiss();
+
+}
+
+
+
+function editNillCanceld(){
+    console.log("pressed no")
+    editModal.dismiss();
+
+}
 function billCanceld(){
     console.log("pressed no")
     modal.dismiss();
@@ -107,6 +147,23 @@ function openActionSheet(bill){
 
     actionSheet.buttons = [
         {
+            text: 'Edit',
+            handler: () => {
+                const billDate = new Date(bill.date);
+                const formattedDate = billDate.getFullYear() + '-' + (billDate.getMonth() + 1).toString().padStart(2, '0') + '-' + billDate.getDate().toString().padStart(2, '0');
+
+                incomeBillEditIDInput.value = bill.id;
+                incomeBillEditNameInput.value = bill.name;
+                incomeBillEditAmountInput.value = bill.amount;
+                incomeBillEditDateInput.value = formattedDate;
+                incomeBillEditCategoryInput.value = bill.category;
+
+                console.log(bill)
+                editModal.present();
+            }
+        },
+
+        {
             text: 'Delete',
             role: 'destructive',
             handler: () => {
@@ -114,12 +171,7 @@ function openActionSheet(bill){
                 deleteBill(bill);
             }
         },
-        {
-            text: 'Share',
-            data: {
-                action: 'share'
-            }
-        },
+
         {
             text: 'Cancel',
             role: 'cancel',
@@ -151,8 +203,19 @@ function deleteBill(billToDelete){
     refreshIncomeList();
 }
 
-function deleteBill(billToEdit) {
-    console.log("edit pressed")
+function editBill(billToEdit) {
+    // Iterate through the listOfIncome array
+    logedInUser.listOfIncome.forEach((bill, index) => {
+        // If the bill has the same id as billToEdit, update it
+        if (bill.id === billToEdit.id) {
+            logedInUser.listOfIncome[index] = billToEdit;
+        }
+    });
+
+    // save the updated user object back to local storage
+    localStorage.setItem("user", JSON.stringify(logedInUser));
+
+    refreshIncomeList();
 }
 
 function refreshIncomeList() {

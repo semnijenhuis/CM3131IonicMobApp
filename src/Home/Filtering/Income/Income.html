@@ -30,7 +30,7 @@
 
 
 
-    <ion-button id="income-addBill-btn" expand="block">Open</ion-button>
+    <ion-button id="income-addBill-btn" expand="block">New income</ion-button>
 
     <ion-modal id="income-newBill-modal"  trigger="income-addBill-btn">
         <ion-header>
@@ -63,9 +63,51 @@
                 <ion-label position="stacked">Category</ion-label>
                 <ion-input id="income-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
             </ion-item>
-
         </ion-content>
     </ion-modal>
+
+    <ion-modal id="income-edit-newBill-modal" >
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button id="income-edit-cancel-btn">Cancel</ion-button>
+                </ion-buttons>
+
+                <ion-title>New income</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button id="income-edit-confirm-btn" strong="true">Confirm</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+            <ion-item>
+                <ion-label position="stacked">ID</ion-label>
+                <ion-input id="income-edit-bill-id" type="text" label="ID" placeholder="ID" readonly></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input id="income-edit-bill-name" type="text" label="Name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Amount</ion-label>
+                <ion-input id="income-edit-bill-amount" type="number" label="Amount" placeholder="Amount"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Date</ion-label>
+                <ion-input id="income-edit-bill-date" type="date" label="Date"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Category</ion-label>
+                <ion-input id="income-edit-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
+            </ion-item>
+        </ion-content>
+    </ion-modal>
+
+
+
+
 
     <ion-card class="contentCard">
         <ion-card-content>
