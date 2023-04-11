@@ -1,3 +1,19 @@
+
+const UserScript = document.createElement('script');
+UserScript.src = '../../User.js';
+
+const billScript = document.createElement('script');
+billScript.src = '../../Bill.js';
+
+const incomeScript = document.createElement('script');
+incomeScript.src = 'Income/Income.js';
+
+const outGoingScript = document.createElement('script');
+outGoingScript.src = 'Outgoing/Outgoing.js';
+
+const resultScript = document.createElement('script');
+resultScript.src = 'Result/Result.js';
+
 customElements.define('page-one', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();
@@ -9,21 +25,9 @@ customElements.define('page-one', class classOne extends HTMLElement {
         this.innerHTML = html;
     }
     async loadScript() {
-        const UserScript = document.createElement('script');
-        UserScript.src = '../../User.js';
         document.head.appendChild(UserScript);
-
-        const billScript = document.createElement('script');
-        billScript.src = '../../Bill.js';
         document.head.appendChild(billScript);
-
-        const incomeScript = document.createElement('script');
-        incomeScript.src = 'Income/Income.js';
         this.appendChild(incomeScript);
-
-
-
-
     }
 });
 
@@ -39,9 +43,9 @@ customElements.define('page-two', class classOne extends HTMLElement {
         this.innerHTML = html;
     }
     async loadScript() {
-        const script = document.createElement('script');
-        script.src = 'Outgoing/Outgoing.js';
-        this.appendChild(script);
+        document.head.appendChild(UserScript);
+        document.head.appendChild(billScript);
+        this.appendChild(outGoingScript);
     }
 });
 
@@ -58,8 +62,8 @@ customElements.define('page-three', class classOne extends HTMLElement {
         this.innerHTML = html;
     }
     async loadScript() {
-        const script = document.createElement('script');
-        script.src = 'Result/Result.js';
-        this.appendChild(script);
+        document.head.appendChild(UserScript);
+        document.head.appendChild(billScript);
+        this.appendChild(resultScript);
     }
 });

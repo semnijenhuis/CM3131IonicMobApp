@@ -24,20 +24,85 @@
 </ion-header>
 
 <ion-content>
+
   <ion-card>
     <ion-card-header>
-      <ion-card-title id="title-animal">result screen screen</ion-card-title>
+      <ion-card-title id="title-animal">Overview</ion-card-title>
+
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <!--        <ion-img id="img-choice" src="./Pictures/mantis.jpg"-->
-      </ion-item>
+      <ion-grid align="center">
+        <ion-row>
+
+
+          <ion-col>
+            <p>Bank account</p>
+            <p>Income</p>
+            <p>Bills</p>
+            <p>Result</p>
+          </ion-col>
+          <ion-col>
+            <p>€</p>
+            <p>€</p>
+            <p>€</p>
+            <p>€</p>
+          </ion-col>
+
+          <ion-col>
+            <p id="total-bankaccount">@amount</p>
+            <p id="total-income">@amount</p>
+            <p id="total-bills">@amount</p>
+            <p id="total-result">@amount</p>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
 
     </ion-card-content>
-    <ion-button expand="block" id="goBackHome"> compleet</ion-button>
 
   </ion-card>
+
+  <ion-button expand="block" id="goBackHome"> compleet</ion-button>
+
+  <ion-card class="contentCard">
+    <ion-card-content>
+
+      <ion-card-header>
+        <ion-card-title>All Incoming</ion-card-title>
+      </ion-card-header>
+
+      <ion-list id="totalIncomeList">
+
+
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card class="contentCard">
+    <ion-card-content>
+
+      <ion-card-header>
+        <ion-card-title>All Bills</ion-card-title>
+      </ion-card-header>
+
+      <ion-list id="totalBillList">
+
+
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+
+
+
 </ion-content>
 
 </body>

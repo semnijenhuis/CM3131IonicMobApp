@@ -19,5 +19,16 @@ class Bill {
         this.payed = false;
     }
 
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            amount: this.amount,
+            date: this.date,
+            category: this.category,
+            payed: this.payed,
+        };
+    }
+
 
 }

@@ -1,14 +1,17 @@
 // Home screen
+
+
+import {inflation} from "../API/Import";
+
 const greetingName = document.getElementById('lbl-greeting');
 const balanceName = document.getElementById('lbl-balance');
-const refreshButton = document.getElementById('refresh');
-const logOut = document.getElementById('logOut');
+const logOut = document.getElementById('settings-logOut-btn');
 const filterButton = document.getElementById('startFilter');
-const upComingBillsList = document.getElementById('home-upcomingBills')
 
 
 // Bills screen
 
+const billsBankAccount = document.getElementById('bills-bankaccount')
 const billsIncome = document.getElementById('bills-income')
 const billsBills = document.getElementById('bills-bills')
 const billsResult = document.getElementById('bills-result')
@@ -16,15 +19,20 @@ const billList = document.getElementById('billList')
 const billIncomeList = document.getElementById('bill-incomeList')
 
 
+const settingButton = document.getElementById('settings-account-btn');
+settingButton.addEventListener("click", startSettings);
+
+
 
 filterButton.addEventListener("click", startFilter);
-refreshButton.addEventListener("click",updateHeader);
+
 logOut.addEventListener("click",deleteUser);
 
 
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 let debt = logedInUser.debt;
 
+billsBankAccount.innerText = logedInUser.bankAccount
 console.log("Home file started")
 function mainHome(status) {
     console.log("Home Started")
@@ -41,89 +49,33 @@ function startFilter(){
     window.location.href = "Filtering/Filtering.html";
 }
 
-function printTest(bill){
-    const actionSheet = document.createElement('ion-action-sheet');
-
-    const editButton = document.createElement('ion-button');
-    editButton.textContent = 'Edit';
-    editButton.addEventListener('click', function() {
-        editBill(bill);
-        actionSheet.dismiss();
-    });
-    actionSheet.appendChild(editButton);
-
-    const deleteButton = document.createElement('ion-button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', function() {
-        deleteBill(bill);
-        actionSheet.dismiss();
-    });
-    actionSheet.appendChild(deleteButton);
-
-    const cancelButton = document.createElement('ion-button');
-    cancelButton.textContent = 'Cancel';
-    cancelButton.role = 'cancel';
-    cancelButton.addEventListener('click', function() {
-        actionSheet.dismiss();
-    });
-    actionSheet.appendChild(cancelButton);
-
-    document.body.appendChild(actionSheet);
-    actionSheet.present();
+function startSettings(){
+    window.location.href = "Settings/Settings.html";
 }
 
+inflation('United States')
+    .then(result => {
+        // Do something with the result
+        console.log(result);
+    })
+    .catch(error => {
+        // Handle the error
+        console.error(error);
+    });
 
-
-
-generateUpcomingList()
 generateBillList()
 generateIncomingList()
 
 
-function generateUpcomingList(){
 
-    for (let i = 0; i < logedInUser.listOfBills.length; i++) {
-        let bill = logedInUser.listOfBills[i];
-        console.log("found bill")
-
-        const card = document.createElement('ion-card');
-        card.classList.add('billCards');
-
-        const content = document.createElement('ion-card-content')
-
-        let name = document.createElement("h1");
-        name.textContent = bill.name;
-
-        let amount = document.createElement("p");
-        amount.textContent = bill.name;
-
-        let amountValue = document.createElement("p");
-        amountValue.textContent = bill.amount;
-
-        let date = document.createElement("p");
-        date.textContent = bill.date;
-
-        content.appendChild(name);
-        content.appendChild(amount);
-        content.appendChild(amountValue);
-        content.appendChild(date);
-        card.appendChild(content)
-        // card.addEventListener('click', function() {
-        //     printTest(bill);
-        // });
-        upComingBillsList.appendChild(card)
-
-    }
-
-}
 
 function generateBillList(){
+
+
     console.log(logedInUser.listOfBills.length)
 
     for (let i = 0; i < logedInUser.listOfBills.length; i++) {
         let bill = logedInUser.listOfBills[i];
-        console.log(bill)
-        console.log(bill.name)
 
         // create the ion-item
         let ionItem = document.createElement("ion-item");
@@ -185,8 +137,6 @@ function generateIncomingList(){
 
     for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
         let bill = logedInUser.listOfIncome[i];
-        console.log(bill)
-        console.log(bill.name)
 
         // create the ion-item
         let ionItem = document.createElement("ion-item");
@@ -246,6 +196,7 @@ function generateIncomingList(){
 function addDebt(event, logedInUser, bill,) {
 
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    user.bankAccount = logedInUser.bankAccount
     const toggleElement = event.target;
 
     bill.payed = !toggleElement.checked;
@@ -253,6 +204,7 @@ function addDebt(event, logedInUser, bill,) {
     user.calculate()
     localStorage.setItem("user", JSON.stringify(user));
 
+    billsBankAccount.innerText = user.bankAccount
     billsIncome.innerText = user.income
     billsBills.innerText = user.debt
     balanceName.innerText = user.result
@@ -262,6 +214,7 @@ function addDebt(event, logedInUser, bill,) {
 function addIncome(event, logedInUser, bill,) {
 
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    user.bankAccount = logedInUser.bankAccount
     const toggleElement = event.target;
 
     bill.payed = !toggleElement.checked;
@@ -269,6 +222,7 @@ function addIncome(event, logedInUser, bill,) {
     user.calculate()
     localStorage.setItem("user", JSON.stringify(user));
 
+    billsBankAccount.innerText = user.bankAccount
     billsIncome.innerText = user.income
     billsBills.innerText = user.debt
     balanceName.innerText = user.result
@@ -282,24 +236,18 @@ function addIncome(event, logedInUser, bill,) {
 function updateHeader() {
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
 
+
+    user.bankAccount = logedInUser.bankAccount
+
     greetingName.textContent = greetingName.textContent.replaceAll("@name", user.username)
-    balanceName.textContent = balanceName.textContent.replaceAll("@amount", "€" + user.result);
+    balanceName.textContent = balanceName.textContent.replaceAll("@amount", "€" + user.result)
 
-    billsIncome.textContent = billsIncome.textContent.replace("@amount","€" + user.getIncome())
-    billsBills.textContent = billsBills.textContent.replace("@amount","€" + user.getDebt())
-    billsResult.textContent = billsResult.textContent.replace("@amount","€" + user.getResult())
-
-}
-
-function updateText() {
-    billsIncome.innerText = user.income
-    billsBills.innerText = user.debt
-    balanceName.innerText = user.result
-    billsResult.innerText = user.result
+    billsBankAccount.textContent = billsBankAccount.textContent.replace("@amount",user.bankAccount)
+    billsIncome.textContent = billsIncome.textContent.replace("@amount", user.getIncome())
+    billsBills.textContent = billsBills.textContent.replace("@amount",user.getDebt())
+    billsResult.textContent = billsResult.textContent.replace("@amount",user.getResult())
 
 }
-
-
 
 
 function deleteUser() {
@@ -308,6 +256,8 @@ function deleteUser() {
 }
 
 
+
+// API's
 
 
 

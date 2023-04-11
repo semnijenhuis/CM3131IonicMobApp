@@ -42,6 +42,9 @@ function getLogedIn() {
         const bill2 = new Bill("Disney",25.5,"04-08-2023","subscription")
         const bill3 = new Bill("Prime",15.5,"23-03-2023","subscription")
 
+        bill1.id = 123;
+        bill2.id = 223;
+        bill3.id = 323;
 
         user.addBill(bill1);
         user.addBill(bill2);
@@ -58,6 +61,8 @@ function getLogedIn() {
         user.addIncome(bill4);
         user.addIncome(bill5);
         user.addIncome(bill6);
+
+
 
         localStorage.setItem("user", JSON.stringify(user));
         mainHome();

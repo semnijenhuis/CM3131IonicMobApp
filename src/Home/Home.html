@@ -20,8 +20,6 @@
 <ion-app>
 
 
-
-
     <ion-tabs id="tb-menu" selectedTab="tb-btn-home">
 
 
@@ -37,34 +35,25 @@
 
             <ion-content class="homeScreen">
 
-
-
-                <h3>Upcoming bills</h3>
-
-<!--                <div class="container">-->
-                <ion-scroll class="container" scrollX="true">
-                    <ion-list>
-                        <ion-item id="home-upcomingBills" >
-                        </ion-item>
-                    </ion-list>
-                </ion-scroll>
-<!--                </div>-->
-
-
-                <p>Up coming bills</p>
-                <ion-button  id="startFilter" expand="block">Start filtering</ion-button>
-                <ion-button id="refresh">refresh</ion-button>
-                <ion-button id="logOut">logout</ion-button>
+                <ion-img src="../Image/loginImage.png"></ion-img>
+                <ion-button id="startFilter" expand="block">Start filtering</ion-button>
 
 
             </ion-content>
         </ion-tab>
 
+        <!--        settingsScreen-->
         <ion-tab id="tb-btn-settings" tab="Settings">
 
 
-            <ion-content>
-                <h1>settings</h1>
+            <ion-content class="settingScreen">
+
+                <ion-button id="settings-account-btn" expand="block">Account</ion-button>
+                <ion-button id="settings-account-btn" expand="block">API</ion-button>
+                <ion-button id="settings-account-btn" expand="block">Overview</ion-button>
+
+                <ion-button id="settings-logOut-btn" expand="block">Log out</ion-button>
+
             </ion-content>
 
         </ion-tab>
@@ -79,14 +68,22 @@
 
 
                         <ion-col>
-                            <p >Income</p>
-                            <p >Bills</p>
-                            <p >Result</p>
+                            <p>Bank account</p>
+                            <p>Income</p>
+                            <p>Bills</p>
+                            <p>Result</p>
+                        </ion-col>
+                        <ion-col>
+                            <p>€</p>
+                            <p>€</p>
+                            <p>€</p>
+                            <p>€</p>
                         </ion-col>
 
                         <ion-col>
-                            <p  id="bills-income">@amount</p>
-                            <p  id="bills-bills">@amount</p>
+                            <p id="bills-bankaccount">@amount</p>
+                            <p id="bills-income">@amount</p>
+                            <p id="bills-bills">@amount</p>
                             <p id="bills-result">@amount</p>
 
                         </ion-col>
@@ -100,20 +97,17 @@
             <ion-content class="billScreen">
 
 
+                <ion-card class="contentCard">
+                    <ion-card-content>
+
+                        <ion-list id="billList">
 
 
+                        </ion-list>
 
-                    <ion-card class="contentCard">
-                        <ion-card-content>
+                    </ion-card-content>
 
-                            <ion-list id="billList">
-
-
-                            </ion-list>
-
-                        </ion-card-content>
-
-                    </ion-card>
+                </ion-card>
 
                 <ion-card class="contentCard">
                     <ion-card-content>
@@ -126,10 +120,6 @@
                     </ion-card-content>
 
                 </ion-card>
-
-
-
-
 
 
             </ion-content>

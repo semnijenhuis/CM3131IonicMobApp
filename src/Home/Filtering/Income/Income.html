@@ -22,17 +22,20 @@
         <ion-buttons>
             <ion-back-button>Back</ion-back-button>
         </ion-buttons>
-        <ion-title slot="end"> Page 2</ion-title>
+        <ion-title> income</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+    <ion-item>
+        <ion-label position="stacked">Bank account</ion-label>
+        <ion-input id="income-edit-bill-bankBalance" type="number" label="Current balance" placeholder="Amount"></ion-input>
+    </ion-item>
 
+    <ion-button id="income-addIncome-btn" expand="block">New income</ion-button>
 
-    <ion-button id="income-addBill-btn" expand="block">New income</ion-button>
-
-    <ion-modal id="income-newBill-modal"  trigger="income-addBill-btn">
+    <ion-modal id="income-newBill-modal"  trigger="income-addIncome-btn">
         <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
@@ -104,9 +107,6 @@
             </ion-item>
         </ion-content>
     </ion-modal>
-
-
-
 
 
     <ion-card class="contentCard">

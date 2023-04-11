@@ -19,25 +19,107 @@
         <ion-buttons>
             <ion-back-button>Back</ion-back-button>
         </ion-buttons>
-        <ion-title slot="end"> Page 2</ion-title>
+        <ion-title > Bills</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title id="title-animal">outgoing screen</ion-card-title>
-        </ion-card-header>
 
-        <ion-card-content>
+    <ion-button id="outgoing-addBill-btn" expand="block">New Bill</ion-button>
+
+    <ion-modal id="outgoing-newBill-modal"  trigger="outgoing-addBill-btn">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button id="outgoing-cancel-btn">Cancel</ion-button>
+                </ion-buttons>
+
+                <ion-title>New Bill</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button id="outgoing-confirm-btn" strong="true">Confirm</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
             <ion-item>
-                <!--        <ion-img id="img-choice" src="./Pictures/mantis.jpg"-->
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input id="outgoing-bill-name" type="text" label="Name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Amount</ion-label>
+                <ion-input id="outgoing-bill-amount" type="number" label="Amount" placeholder="Amount"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Date</ion-label>
+                <ion-input id="outgoing-bill-date" type="date" label="Date"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Category</ion-label>
+                <ion-input id="outgoing-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
+            </ion-item>
+        </ion-content>
+    </ion-modal>
+
+    <ion-modal id="outgoing-edit-newBill-modal" >
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button id="outgoing-edit-cancel-btn">Cancel</ion-button>
+                </ion-buttons>
+
+                <ion-title>New outgoing</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button id="outgoing-edit-confirm-btn" strong="true">Confirm</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+            <ion-item>
+                <ion-label position="stacked">ID</ion-label>
+                <ion-input id="outgoing-edit-bill-id" type="text" label="ID" placeholder="ID" readonly></ion-input>
             </ion-item>
 
+            <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input id="outgoing-edit-bill-name" type="text" label="Name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Amount</ion-label>
+                <ion-input id="outgoing-edit-bill-amount" type="number" label="Amount" placeholder="Amount"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Date</ion-label>
+                <ion-input id="outgoing-edit-bill-date" type="date" label="Date"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Category</ion-label>
+                <ion-input id="outgoing-edit-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
+            </ion-item>
+        </ion-content>
+    </ion-modal>
+
+    <ion-card class="contentCard">
+        <ion-card-content>
+
+            <ion-card-header>
+                <ion-card-title>All Bills</ion-card-title>
+            </ion-card-header>
+
+            <ion-list id="outgoing-incomeList">
+
+
+            </ion-list>
+
         </ion-card-content>
-        <ion-button expand="block" href="#/three"> Result</ion-button>
 
     </ion-card>
+
+    <ion-button expand="block" href="#/three"> Result</ion-button>
+
+
+
 </ion-content>
 </body>
 </html>

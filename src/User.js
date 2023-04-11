@@ -22,8 +22,30 @@ class User {
         this.income = this.getIncome();
         this.debt = this.getDebt();
         this.result = this.getResult();
+        this.bankAccount = 0;
 
     }
+
+    toJSON() {
+        const { username, password, bankAccount, income, debt, result, listOfIncome, listOfBills } = this;
+        return {
+            username,
+            password,
+            bankAccount,
+            income,
+            debt,
+            result,
+            listOfIncome: listOfIncome.map((bill) => bill.toJSON()),
+            listOfBills: listOfBills.map((bill) => bill.toJSON()),
+        };
+    }
+
+
+
+
+
+
+
 
 
     addBill(bill){
@@ -33,6 +55,7 @@ class User {
 
     addIncome(bill){
         this.listOfIncome.push(bill)
+        this.calculate();
     }
 
     getIncome() {
@@ -40,30 +63,37 @@ class User {
         for (let i = 0; i < this.listOfIncome.length; i++) {
             let foundBill = this.listOfIncome[i];
             if (foundBill.payed === false) {
-                total = total + this.listOfIncome[i].amount;
+                let num = parseFloat(foundBill.amount);
+                total = total + num
             }
 
         }
-        return total;
+
+        return total.toFixed(2);
     }
 
     getDebt() {
         let total = 0;
+
         for (let i = 0; i < this.listOfBills.length; i++) {
             let foundBill = this.listOfBills[i];
             if (foundBill.payed === false) {
-                total = total + this.listOfBills[i].amount;
+                let num = parseFloat(foundBill.amount);
+                total = total + num
             }
 
+
         }
-        return total;
+
+        return total.toFixed(2);
     }
 
     getResult() {
         let income = this.getIncome();
         let debt = this.getDebt();
         let total = income - debt;
-        return total;
+        let num = parseFloat(total);
+        return num.toFixed(2);
     }
 
     calculate(){
@@ -71,6 +101,17 @@ class User {
         this.debt = this.getDebt();
         this.result = this.getResult();
     }
+
+
+    exportBills() {
+        return this.listOfBills.filter(bill => bill instanceof Bill).map(bill => bill.toJSON());
+    }
+
+    exportIncome() {
+        return this.listOfIncome.map((bill) => bill.toJSON());
+    }
+
+
 
 
 
