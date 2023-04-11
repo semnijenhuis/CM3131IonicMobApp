@@ -1,8 +1,6 @@
 // Home screen
 
 
-import {inflation} from "../API/Import";
-
 const greetingName = document.getElementById('lbl-greeting');
 const balanceName = document.getElementById('lbl-balance');
 const logOut = document.getElementById('settings-logOut-btn');
