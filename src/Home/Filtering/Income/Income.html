@@ -27,23 +27,69 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title id="title-animal">Incoming screen</ion-card-title>
-        </ion-card-header>
 
-        <ion-card-content>
+
+
+    <ion-button id="income-addBill-btn" expand="block">Open</ion-button>
+
+    <ion-modal id="income-newBill-modal"  trigger="income-addBill-btn">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button id="income-cancel-btn">Cancel</ion-button>
+                </ion-buttons>
+
+                <ion-title>New income</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button id="income-confirm-btn" strong="true">Confirm</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
             <ion-item>
-                <!--        <ion-img id="img-choice" src="./Pictures/mantis.jpg"-->
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input id="income-bill-name" type="text" label="Name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Amount</ion-label>
+                <ion-input id="income-bill-amount" type="number" label="Amount" placeholder="Amount"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Date</ion-label>
+                <ion-input id="income-bill-date" type="date" label="Date"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Category</ion-label>
+                <ion-input id="income-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
             </ion-item>
 
+        </ion-content>
+    </ion-modal>
+
+    <ion-card class="contentCard">
+        <ion-card-content>
+
+            <ion-card-header>
+                <ion-card-title>All Incoming</ion-card-title>
+            </ion-card-header>
+
+            <ion-list id="income-incomeList">
+
+
+            </ion-list>
+
         </ion-card-content>
-        <ion-button expand="block" href="#/two"> Outstanding bills</ion-button>
 
     </ion-card>
+
+    <ion-button expand="block" href="#/two"> Outstanding bills</ion-button>
+
+
 </ion-content>
 </ion-app>
 
 <script src="Income.js"></script>
+<script src="../../../User.js"></script>
 </body>
 </html>

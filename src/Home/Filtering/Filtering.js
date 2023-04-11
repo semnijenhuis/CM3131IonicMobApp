@@ -9,9 +9,21 @@ customElements.define('page-one', class classOne extends HTMLElement {
         this.innerHTML = html;
     }
     async loadScript() {
-        const script = document.createElement('script');
-        script.src = 'Income/Income.js';
-        this.appendChild(script);
+        const UserScript = document.createElement('script');
+        UserScript.src = '../../User.js';
+        document.head.appendChild(UserScript);
+
+        const billScript = document.createElement('script');
+        billScript.src = '../../Bill.js';
+        document.head.appendChild(billScript);
+
+        const incomeScript = document.createElement('script');
+        incomeScript.src = 'Income/Income.js';
+        this.appendChild(incomeScript);
+
+
+
+
     }
 });
 

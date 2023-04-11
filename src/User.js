@@ -44,7 +44,7 @@ class User {
             }
 
         }
-        return total.toFixed(2);
+        return total;
     }
 
     getDebt() {
@@ -56,14 +56,14 @@ class User {
             }
 
         }
-        return total.toFixed(2);
+        return total;
     }
 
     getResult() {
         let income = this.getIncome();
         let debt = this.getDebt();
         let total = income - debt;
-        return total.toFixed(2);
+        return total;
     }
 
     calculate(){

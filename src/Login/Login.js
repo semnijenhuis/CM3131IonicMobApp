@@ -48,7 +48,16 @@ function getLogedIn() {
         user.addBill(bill3);
 
         const bill4 = new Bill("RGU",1800.50,"1-03-2023","Work")
+        const bill5 = new Bill("TaxOffice",300.50,"1-03-2023","Taxes")
+        const bill6 = new Bill("Uber",150.50,"1-03-2023","Work")
+        bill4.id = 100;
+        bill5.id = 200;
+        bill6.id = 300;
+
+
         user.addIncome(bill4);
+        user.addIncome(bill5);
+        user.addIncome(bill6);
 
         localStorage.setItem("user", JSON.stringify(user));
         mainHome();
