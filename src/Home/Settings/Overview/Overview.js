@@ -6,6 +6,14 @@ const colBillTitle = document.getElementById('overView-bill-title')
 const colIncBar = document.getElementById('overView-income-bar')
 const colBillBar = document.getElementById('overView-bill-bar')
 
+const cancelButton =document.getElementById('cancel');
+
+cancelButton.addEventListener("click", backToHome)
+
+function backToHome(){
+    console.log("pressed to go back home")
+    window.location = "../../Home.html";
+}
 
 generateOverviewIncome()
 generateOverviewBill()

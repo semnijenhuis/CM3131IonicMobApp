@@ -35,7 +35,7 @@ function getLogedIn() {
 
     } else {
 
-        const user = new User(username,password,[],[])
+        const user = new User(username,password,[],[],"euro")
 
         let housing = new Category("Housing");
         let transportation = new Category("Transportation");

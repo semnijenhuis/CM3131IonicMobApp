@@ -64,8 +64,7 @@
             </ion-item>
             <ion-item>
                 <ion-label>Category</ion-label>
-                <ion-select id="categoryList" label="categoryList" placeholder="Select a category">
-                </ion-select>
+                <ion-select id="categoryList" label="categoryList" placeholder="Select a category"></ion-select>
             </ion-item>
         </ion-content>
     </ion-modal>
@@ -102,9 +101,13 @@
                 <ion-label position="stacked">Date</ion-label>
                 <ion-input id="income-edit-bill-date" type="date" label="Date"></ion-input>
             </ion-item>
+
+
+
             <ion-item>
-                <ion-label position="stacked">Category</ion-label>
-                <ion-input id="income-edit-bill-category" type="text"  label="Category" placeholder="Category"></ion-input>
+
+                <ion-label>Category</ion-label>
+                <ion-select id="categoryListOutgoingEdit" label="categoryList" placeholder="Select a category"></ion-select>
             </ion-item>
         </ion-content>
     </ion-modal>
@@ -127,6 +130,7 @@
     </ion-card>
 
     <ion-button expand="block" href="#/two"> Outstanding bills</ion-button>
+    <ion-button id="cancel"> Cancel</ion-button>
 
 
 </ion-content>

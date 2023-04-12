@@ -9,6 +9,11 @@ const filterButton = document.getElementById('startFilter');
 
 // Bills screen
 
+const CURID1 = document.getElementById('currencyID1')
+const CURID2 = document.getElementById('currencyID2')
+const CURID3 = document.getElementById('currencyID3')
+const CURID4 = document.getElementById('currencyID4')
+
 const billsBankAccount = document.getElementById('bills-bankaccount')
 const billsIncome = document.getElementById('bills-income')
 const billsBills = document.getElementById('bills-bills')
@@ -17,19 +22,39 @@ const billList = document.getElementById('billList')
 const billIncomeList = document.getElementById('bill-incomeList')
 
 
+logOut.addEventListener("click",deleteUser);
 
 
-const settingButton = document.getElementById('settings-account-btn');
-settingButton.addEventListener("click", startSettings);
+const currencySwitch = document.getElementById('currencySwitch')
+
+
+
+
+currencySwitch.addEventListener("ionChange", function(event) {
+    const isChecked = event.detail.checked;
+    switchCurrency(isChecked)
+});
+
+
+
+
+// const settingButton = document.getElementById('settings-account-btn');
+// settingButton.addEventListener("click", startSettings);
 
 const overviewBtn = document.getElementById('settings-Overview-btn');
+const apiBtn = document.getElementById('settings-API-btn');
+
 overviewBtn.addEventListener('click', () => {
     window.location.href ='Settings/Overview/Overview.html'
 });
 
+apiBtn.addEventListener('click', () => {
+    window.location.href ='Settings/API/Api.html'
+});
+
 filterButton.addEventListener("click", startFilter);
 
-logOut.addEventListener("click",deleteUser);
+
 
 
 let logedInUser = JSON.parse(localStorage.getItem("user"));
@@ -60,7 +85,7 @@ function startSettings(){
 
 generateBillList()
 generateIncomingList()
-
+currencyCheck()
 
 
 
@@ -101,7 +126,7 @@ function generateBillList(){
         // create the item-price span and set its text content
         let itemPrice = document.createElement("span");
         itemPrice.setAttribute("class", "item-price");
-        itemPrice.textContent =  "€" +bill.amount;
+        itemPrice.textContent =  logedInUser.currency +" " +bill.amount;
 
         // append the item-date and item-price spans to the item-details span
         itemDetails.appendChild(itemDate);
@@ -162,7 +187,7 @@ function generateIncomingList(){
         // create the item-price span and set its text content
         let itemPrice = document.createElement("span");
         itemPrice.setAttribute("class", "item-price");
-        itemPrice.textContent =  "€" +bill.amount;
+        itemPrice.textContent =  logedInUser.currency +" " +bill.amount;
 
         // append the item-date and item-price spans to the item-details span
         itemDetails.appendChild(itemDate);
@@ -191,7 +216,7 @@ function generateIncomingList(){
 
 function addDebt(event, logedInUser, bill,) {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -199,7 +224,6 @@ function addDebt(event, logedInUser, bill,) {
     const toggleElement = event.target;
 
     bill.payed = !toggleElement.checked;
-
     user.calculate()
     localStorage.setItem("user", JSON.stringify(user));
 
@@ -212,7 +236,7 @@ function addDebt(event, logedInUser, bill,) {
 
 function addIncome(event, logedInUser, bill,) {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -236,22 +260,52 @@ function addIncome(event, logedInUser, bill,) {
 
 
 function updateHeader() {
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills ,logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
     user.calculate();
 
     greetingName.textContent = greetingName.textContent.replaceAll("@name", user.username)
-    balanceName.textContent = balanceName.textContent.replaceAll("@amount", "€" + user.result)
+    balanceName.textContent = balanceName.textContent.replaceAll("@amount", logedInUser.currency + user.result)
 
     billsBankAccount.textContent = billsBankAccount.textContent.replace("@amount",user.bankAccount)
     billsIncome.textContent = billsIncome.textContent.replace("@amount", user.getIncome())
     billsBills.textContent = billsBills.textContent.replace("@amount",user.getDebt())
     billsResult.textContent = billsResult.textContent.replace("@amount",user.getResult())
 
+    CURID1.innerText = logedInUser.currency;
+    CURID2.innerText = logedInUser.currency;
+    CURID3.innerText = logedInUser.currency;
+    CURID4.innerText = logedInUser.currency;
+
     localStorage.setItem("user", JSON.stringify(user));
 
+}
+
+function switchCurrency(bool){
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills ,logedInUser.currency)
+    user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
+    console.log(bool)
+
+    if (bool) {
+        user.switchCurrency("Pound",2);
+    }
+    else {
+        user.switchCurrency("Euro",0.5);
+
+    }
+
+    localStorage.setItem("user", JSON.stringify(user));
+    window.location.reload();
+
+}
+
+function currencyCheck() {
+    currencySwitch.checked = logedInUser.currency === "£";
 }
 
 

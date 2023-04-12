@@ -3,6 +3,13 @@ const backHomeButton =document.getElementById('goBackHome')
 const totalBillList = document.getElementById('totalBillList')
 const totalIncomeList = document.getElementById('totalIncomeList')
 
+
+
+const CURID1 = document.getElementById('currencyResultID1')
+const CURID2 = document.getElementById('currencyResultID2')
+const CURID3 = document.getElementById('currencyResultID3')
+const CURID4 = document.getElementById('currencyResultID4')
+
 const totalBank = document.getElementById('total-bankaccount')
 const totalIncome = document.getElementById('total-income')
 const totalBills = document.getElementById('total-bills')
@@ -18,6 +25,11 @@ setInfo()
 
 function setInfo() {
     let logedInUser = JSON.parse(localStorage.getItem("user"));
+
+    CURID1.innerText = logedInUser.currency
+    CURID2.innerText = logedInUser.currency
+    CURID3.innerText = logedInUser.currency
+    CURID4.innerText = logedInUser.currency
 
     totalBank.innerText = logedInUser.bankAccount;
     totalIncome.innerText = logedInUser.income;
@@ -55,7 +67,7 @@ function generateIncomingList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = "€" + bill.amount;
+            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -105,7 +117,7 @@ function generateBillList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = "€" + bill.amount;
+            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);

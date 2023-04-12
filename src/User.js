@@ -6,6 +6,7 @@ class User {
     income = 0;
     debt = 0;
     result = 0;
+    currency ;
 
     listOfIncome = [];
     listOfBills = [];
@@ -16,7 +17,7 @@ class User {
 
 
 
-    constructor(username, password, listOfIncome, listOfBills) {
+    constructor(username, password, listOfIncome, listOfBills,currency) {
         this.username = username;
         this.password = password;
 
@@ -27,6 +28,7 @@ class User {
         this.debt = this.getDebt();
         this.result = this.getResult();
         this.bankAccount = 0;
+        this.currency = this.setCurrencySymbol(currency);
     }
 
 
@@ -218,12 +220,70 @@ class User {
         this.debt = this.getDebt();
         this.result = this.getResult();
 
-        console.log("start")
         this.setPercentageBill()
         this.setPercentageIncome()
-        console.log(this.listOfCategoryBill)
-        console.log("end")
     }
+
+    setCurrencySymbol(input){
+        if (input.toUpperCase() === "EUR" || input.toUpperCase() === "EURO"|| input.toUpperCase() === "€") {
+            return "€";
+        }
+        else if (input.toUpperCase() === "GBP" || input.toUpperCase() === "POUND"|| input.toUpperCase() === "£")
+        {
+            return "£";
+        }
+        else {
+            return "NaN"
+        }
+    }
+
+    switchCurrency(input, exchangeRate){
+        let inputToCap = input.toUpperCase();
+        console.log(input.toUpperCase())
+        if (inputToCap === "EUR" || inputToCap === "EURO"|| inputToCap === "€") {
+            if (this.currency !== "€"){
+                this.currency = "€"
+                this.reCalculate(exchangeRate)
+            }
+            else {
+                console.log("Cant change it to euro, its already in euro")
+            }
+        }
+        else if (inputToCap === "GBP" || inputToCap === "POUND"|| inputToCap === "£")
+        {
+
+            if (this.currency !== "£"){
+                this.currency = "£"
+                this.reCalculate(exchangeRate)
+            }
+            else {
+                console.log("Cant change it to pound, its already in pound")
+            }
+        }
+        else {
+            console.log("Couldn't find the correct one, you tried : "+ input)
+        }
+
+
+
+    }
+
+    reCalculate(exchangeRate) {
+        this.bankAccount = billsBankAccount *exchangeRate;
+
+        for (const billInc of this.listOfIncome) {
+            let newAmount = billInc.amount*exchangeRate;
+            billInc.amount = newAmount.toFixed(2)
+        }
+
+        for (const billOut of this.listOfBills) {
+            let newAmount = billOut.amount*exchangeRate;
+            billOut.amount = newAmount.toFixed(2)
+        }
+
+    }
+
+
 
 
     exportBills() {

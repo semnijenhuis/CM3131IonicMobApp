@@ -1,4 +1,11 @@
+const cancelButton =document.getElementById('cancel');
 
+cancelButton.addEventListener("click", backToHome)
+
+function backToHome(){
+    console.log("pressed to go back home")
+    window.location = "../../Home.html";
+}
 
 function euroToPound(amount) {
     let outcome;
@@ -52,7 +59,7 @@ function poundToEuro(amount) {
     return outcome;
 }
 
-export function inflation(country) {
+function inflation(country) {
     const apiKey = 'QunjuVBtotwXToWcbGHCKQ==GtCi7vkiXRQ5f4Bk';
     const url = `https://api.api-ninjas.com/v1/inflation?country=${country}`;
     const headers = {
@@ -81,6 +88,3 @@ export function inflation(country) {
             return null;
         });
 }
-
-
-

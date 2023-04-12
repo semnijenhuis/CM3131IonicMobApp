@@ -32,20 +32,40 @@ outgoingEditConfirmButton.addEventListener("click", editBillConfirmed)
 outgoingEditCancelButton.addEventListener("click", editBillCancel)
 
 let selectedCategoryOutgoing;
+
 const categoryListOutgoing = document.getElementById('categoryListOutgoing')
+const categoryListOutgoingEdit = document.getElementById('categoryListOutgoingEdit')
 
 generateBillList();
 generateCategoryOutgoing()
+generateCategoryOutgoingEdit();
+
+
 
 function generateCategoryOutgoing() {
-    console.log("Category out started")
-    console.log(logedInUser.listOfCategoryBill)
     for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
         let categoryElement = logedInUser.listOfCategoryBill[i];
         let ionItem = document.createElement("ion-select-option");
         ionItem.innerText = categoryElement.name;
         ionItem.value = categoryElement.name;
         categoryListOutgoing.appendChild(ionItem);
+
+    }
+
+}
+
+
+//TODO: kijk hier eventueel even naar
+function generateCategoryOutgoingEdit() {
+    console.log("started")
+    console.log(logedInUser.listOfCategoryBill)
+    console.log(logedInUser.listOfCategoryBill.length)
+    for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
+        let categoryElement = logedInUser.listOfCategoryBill[i];
+        let ionItem = document.createElement("ion-select-option");
+        ionItem.innerText = categoryElement.name;
+        ionItem.value = categoryElement.name;
+        categoryListOutgoingEdit.appendChild(ionItem);
     }
 
 }
@@ -82,7 +102,7 @@ function billCancel() {
 function editBillConfirmed() {
 
     let storageUser = JSON.parse(localStorage.getItem("user"));
-    newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, outgoingBillEditCategoryInput.value)
+    newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, selectedCategoryOutgoing)
     newBill.id = outgoingBillEditIDInput.value;
 
     editBill(newBill)
@@ -161,7 +181,7 @@ function generateBillList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = "€" + bill.amount;
+            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -193,14 +213,17 @@ function openActionSheet(bill) {
         {
             text: 'Edit',
             handler: () => {
-                const billDate = new Date(bill.date);
+
+                const dateString = bill.date;
+                const [day, month, year] = dateString.split("-").map(Number);
+                const billDate = new Date(year, month - 1, day);
                 const formattedDate = billDate.getFullYear() + '-' + (billDate.getMonth() + 1).toString().padStart(2, '0') + '-' + billDate.getDate().toString().padStart(2, '0');
 
                 outgoingBillEditIDInput.value = bill.id;
                 outgoingBillEditNameInput.value = bill.name;
                 outgoingBillEditAmountInput.value = bill.amount;
                 outgoingBillEditDateInput.value = formattedDate;
-                outgoingBillEditCategoryInput.value = bill.category;
+                // categoryListOutgoingEdit.value = bill.category;
 
                 console.log(bill)
                 editOutgoingModal.present();

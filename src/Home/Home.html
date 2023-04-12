@@ -45,14 +45,17 @@
         <!--        settingsScreen-->
         <ion-tab id="tb-btn-settings" tab="Settings">
 
+            <ion-toolbar class="modalHead">
+                <p align="center">Settings</p>
+            </ion-toolbar>
+
 
 
 
 
             <ion-content class="settingScreen">
 
-                <ion-button id="settings-account-btn" expand="block">Account</ion-button>
-                <ion-button id="settings-account-btn" expand="block">API</ion-button>
+                <ion-button id="settings-API-btn" expand="block">API</ion-button>
                 <ion-button id="settings-Overview-btn" expand="block">Overview</ion-button>
                 <ion-button id="settings-logOut-btn" expand="block">Log out</ion-button>
 
@@ -76,10 +79,10 @@
                             <p>Result</p>
                         </ion-col>
                         <ion-col>
-                            <p>€</p>
-                            <p>€</p>
-                            <p>€</p>
-                            <p>€</p>
+                            <p id="currencyID1">€</p>
+                            <p id="currencyID2">€</p>
+                            <p id="currencyID3">€</p>
+                            <p id="currencyID4">€</p>
                         </ion-col>
 
                         <ion-col>
@@ -98,6 +101,11 @@
 
             <ion-content class="billScreen">
 
+                <ion-card>
+                    <ion-card-content>
+                        <ion-toggle id="currencySwitch">Euro / Pound</ion-toggle>
+                    </ion-card-content>
+                </ion-card>
 
                 <ion-card class="contentCard">
                     <ion-card-content>

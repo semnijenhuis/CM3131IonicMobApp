@@ -24,9 +24,19 @@ const incomeBillEditAmountInput = document.getElementById('income-edit-bill-amou
 const incomeBillEditDateInput = document.getElementById('income-edit-bill-date');
 const incomeBillEditCategoryInput = document.getElementById('income-edit-bill-category');
 
+const cancelButton =document.getElementById('cancel');
+
+cancelButton.addEventListener("click", backToHome)
+
+function backToHome(){
+    console.log("pressed to go back home")
+    window.location = "./../Home.html";
+}
+
 let selectedCategory;
 
 const categoryList = document.getElementById('categoryList')
+const categoryListEdit = document.getElementById('income-edit-bill-category')
 
 incomeConfirmButton.addEventListener("click", billConfirmed)
 incomeCancelButton.addEventListener("click", billCancel)
@@ -40,13 +50,14 @@ incomeEditConfirmButton.addEventListener("click", editBillConfirmed)
 incomeEditCancelButton.addEventListener("click", editBillCancel)
 
 generateIncomingList();
-generateCategory()
+generateCategory(categoryList);
+generateCategory(categoryListEdit);
 
 
 
 function billConfirmed() {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -94,7 +105,7 @@ function editBillCancel() {
 
 function deleteBill(billToDelete) {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -150,7 +161,7 @@ function generateIncomingList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = "€" + bill.amount;
+            itemPrice.textContent = logedInUser.currency+" " + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -231,15 +242,13 @@ function refreshIncomeList() {
 
 
 
-function generateCategory() {
-    console.log("Category gen started")
-    console.log(logedInUser.listOfCategoryIncome)
+function generateCategory(list) {
     for (let i = 0; i < logedInUser.listOfCategoryIncome.length; i++) {
         let categoryElement = logedInUser.listOfCategoryIncome[i];
         let ionItem = document.createElement("ion-select-option");
         ionItem.innerText = categoryElement.name;
         ionItem.value = categoryElement.name;
-        categoryList.appendChild(ionItem);
+        list.appendChild(ionItem);
     }
 
 }
