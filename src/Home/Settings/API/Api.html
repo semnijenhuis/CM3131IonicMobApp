@@ -1,35 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
-  <link rel="stylesheet" href="Api.css">
+    <link rel="stylesheet" href="Api.css">
 
 </head>
 
 <body>
 <ion-app>
+    <ion-content>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Switch currency</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-toggle id="currencySwitch">Euro / Pound</ion-toggle>
+            </ion-card-content>
+        </ion-card>
 
 
-  <ion-card>
-  <ion-card-content>
-    <ion-toggle id="currencySwitch">Euro / Pound</ion-toggle>
-  </ion-card-content>
-  </ion-card>
+        <ion-card class="contentCard">
+            <ion-card-content>
+                <ion-card-header>
+                    <ion-card-title>Montly Inflation</ion-card-title>
+                </ion-card-header>
 
-  <ion-button id="cancel"> Cancel</ion-button>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col id="inflationcol-name" size="6">
+                            <ion-label>Name</ion-label>
+
+
+                        </ion-col>
+                        <ion-col id="inflationcol-current" size="3">
+                            <ion-label>Current</ion-label>
+                        </ion-col>
+                        <ion-col id="inflationcol-future" size="3">
+                            <ion-label>Future</ion-label>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="contentCard">
+            <ion-card-content>
+                <ion-card-header>
+                    <ion-card-title>Yearly Inflation</ion-card-title>
+                </ion-card-header>
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col id="inflationcol-name-year" size="5">
+                            <ion-label>Name</ion-label>
+
+
+                        </ion-col>
+                        <ion-col id="inflationcol-current-year" size="3">
+                            <ion-label>Current</ion-label>
+                        </ion-col>
+                        <ion-col id="inflationcol-future-year" size="4">
+                            <ion-label>Future</ion-label>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+
+
+        <ion-button id="cancel"> Cancel</ion-button>
+    </ion-content>
 </ion-app>
 
 
-
 <script src="Api.js"></script>
+<script src="../../../Components/User.js"></script>
 </body>
 
 

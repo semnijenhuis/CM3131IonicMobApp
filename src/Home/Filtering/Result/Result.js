@@ -1,8 +1,7 @@
-const backHomeButton =document.getElementById('goBackHome')
+const backHomeButton = document.getElementById('goBackHome')
 
 const totalBillList = document.getElementById('totalBillList')
 const totalIncomeList = document.getElementById('totalIncomeList')
-
 
 
 const CURID1 = document.getElementById('currencyResultID1')
@@ -67,7 +66,7 @@ function generateIncomingList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
+            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -117,7 +116,7 @@ function generateBillList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
+            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -141,8 +140,7 @@ function generateBillList() {
 }
 
 
-
-function backToHome(){
+function backToHome() {
     console.log("pressed to go back home")
     window.location = "./../Home.html";
 }

@@ -1,23 +1,17 @@
-
 const usernameInput = document.getElementById('username-input');
 const passwordInput = document.getElementById('password-input');
 
 // const password = document.getElementById('Password');
 const loginButton = document.getElementById('logIn');
-loginButton.addEventListener("click",getLogedIn);
-
-
-
+loginButton.addEventListener("click", getLogedIn);
 
 
 let user;
 
 
-function mainLogin(){
+function mainLogin() {
     window.location = "./Login/Login.html";
 }
-
-
 
 
 function getLogedIn() {
@@ -35,7 +29,7 @@ function getLogedIn() {
 
     } else {
 
-        const user = new User(username,password,[],[],"euro")
+        const user = new User(username, password, [], [], "euro")
 
         let housing = new Category("Housing");
         let transportation = new Category("Transportation");
@@ -81,9 +75,9 @@ function getLogedIn() {
         user.newIncomeCategory(social_security);
 
 
-        const bill1 = new Bill("Appartment",800.0,"10-05-2023","Housing")
-        const bill2 = new Bill("firstBus",25.5,"04-08-2023","Transportation")
-        const bill3 = new Bill("Prime",15.5,"23-03-2023","Entertainment")
+        const bill1 = new Bill("Appartment", 800.0, "10-05-2023", "Housing")
+        const bill2 = new Bill("firstBus", 25.5, "04-08-2023", "Transportation")
+        const bill3 = new Bill("Prime", 15.5, "23-03-2023", "Entertainment")
 
         bill1.id = 123;
         bill2.id = 223;
@@ -93,9 +87,9 @@ function getLogedIn() {
         user.addBill(bill2);
         user.addBill(bill3);
 
-        const bill4 = new Bill("RGU",1800.50,"1-03-2023","Salary")
-        const bill5 = new Bill("TaxOffice",300.50,"1-03-2023","Social Security")
-        const bill6 = new Bill("Uber",150.50,"1-03-2023","Rental")
+        const bill4 = new Bill("RGU", 1800.50, "1-03-2023", "Salary")
+        const bill5 = new Bill("TaxOffice", 300.50, "1-03-2023", "Social Security")
+        const bill6 = new Bill("Uber", 150.50, "1-03-2023", "Rental")
         bill4.id = 100;
         bill5.id = 200;
         bill6.id = 300;
@@ -104,11 +98,6 @@ function getLogedIn() {
         user.addIncome(bill4);
         user.addIncome(bill5);
         user.addIncome(bill6);
-
-
-
-
-
 
 
         localStorage.setItem("user", JSON.stringify(user));

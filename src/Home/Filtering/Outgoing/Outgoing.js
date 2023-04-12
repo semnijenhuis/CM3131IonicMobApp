@@ -1,5 +1,6 @@
 console.log("outgoing file started")
 
+let selectedCategoryOutgoing;
 
 const outgoingBillList = document.getElementById('outgoing-incomeList')
 
@@ -31,7 +32,6 @@ outgoingCancelButton.addEventListener("click", billCancel)
 outgoingEditConfirmButton.addEventListener("click", editBillConfirmed)
 outgoingEditCancelButton.addEventListener("click", editBillCancel)
 
-let selectedCategoryOutgoing;
 
 const categoryListOutgoing = document.getElementById('categoryListOutgoing')
 const categoryListOutgoingEdit = document.getElementById('categoryListOutgoingEdit')
@@ -39,7 +39,6 @@ const categoryListOutgoingEdit = document.getElementById('categoryListOutgoingEd
 generateBillList();
 generateCategoryOutgoing()
 generateCategoryOutgoingEdit();
-
 
 
 function generateCategoryOutgoing() {
@@ -55,11 +54,9 @@ function generateCategoryOutgoing() {
 }
 
 
-//TODO: kijk hier eventueel even naar
 function generateCategoryOutgoingEdit() {
-    console.log("started")
-    console.log(logedInUser.listOfCategoryBill)
-    console.log(logedInUser.listOfCategoryBill.length)
+
+
     for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
         let categoryElement = logedInUser.listOfCategoryBill[i];
         let ionItem = document.createElement("ion-select-option");
@@ -75,20 +72,25 @@ function billConfirmed() {
 
     let storageUser = JSON.parse(localStorage.getItem("user"));
 
-    let user = new User(storageUser.username, storageUser.password, storageUser.listOfIncome, storageUser.listOfBills)
+    let user = new User(storageUser.username, storageUser.password, storageUser.listOfIncome, storageUser.listOfBills, storageUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
 
     newBill = new Bill(outgoingBillNameInput.value, outgoingBillAmountInput.value, outgoingBillDateInput.value, selectedCategoryOutgoing)
-    user.addBill(newBill)
 
-    localStorage.setItem("user", JSON.stringify(user));
+    if (!newBill.checkBill()) {
+
+        user.addBill(newBill)
+
+        localStorage.setItem("user", JSON.stringify(user));
 
 
-    refreshIncomeList()
+        refreshIncomeList()
 
-    addOutgoingModal.dismiss();
+        addOutgoingModal.dismiss();
+    }
+
 
 }
 
@@ -102,17 +104,20 @@ function billCancel() {
 function editBillConfirmed() {
 
     let storageUser = JSON.parse(localStorage.getItem("user"));
+
     newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, selectedCategoryOutgoing)
     newBill.id = outgoingBillEditIDInput.value;
+    if (!newBill.checkBill()) {
+        editBill(newBill)
 
-    editBill(newBill)
-
-    localStorage.setItem("user", JSON.stringify(storageUser));
+        localStorage.setItem("user", JSON.stringify(storageUser));
 
 
-    refreshIncomeList()
+        refreshIncomeList()
 
-    editOutgoingModal.dismiss();
+        editOutgoingModal.dismiss();
+    }
+
 
 }
 
@@ -124,7 +129,7 @@ function editBillCancel() {
 
 
 function deleteBill(billToDelete) {
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -138,6 +143,7 @@ function deleteBill(billToDelete) {
 }
 
 function editBill(billToEdit) {
+
     let storageUser = JSON.parse(localStorage.getItem("user"));
     // Iterate through the listOfBills array
     storageUser.listOfBills.forEach((bill, index) => {
@@ -148,7 +154,7 @@ function editBill(billToEdit) {
     });
 
     // save the updated user object back to local storage
-    storageUser.setItem("user", JSON.stringify(storageUser));
+    localStorage.setItem("user", JSON.stringify(storageUser));
 
     refreshIncomeList();
 }
@@ -181,7 +187,7 @@ function generateBillList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency+" "  + bill.amount;
+            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -223,7 +229,7 @@ function openActionSheet(bill) {
                 outgoingBillEditNameInput.value = bill.name;
                 outgoingBillEditAmountInput.value = bill.amount;
                 outgoingBillEditDateInput.value = formattedDate;
-                // categoryListOutgoingEdit.value = bill.category;
+                categoryListOutgoingEdit.value = bill.category;
 
                 console.log(bill)
                 editOutgoingModal.present();

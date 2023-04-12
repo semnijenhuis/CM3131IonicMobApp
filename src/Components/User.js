@@ -27,7 +27,7 @@ class User {
         this.income = this.getIncome();
         this.debt = this.getDebt();
         this.result = this.getResult();
-        this.bankAccount = 0;
+        this.bankAccount = 0.00;
         this.currency = this.setCurrencySymbol(currency);
     }
 
@@ -206,9 +206,11 @@ class User {
     }
 
     getResult() {
-        let income = this.getIncome();
-        let debt = this.getDebt();
-        let total = income - debt;
+        let bank = parseInt(this.bankAccount)
+        let income = parseInt(this.getIncome());
+        let debt = parseInt(this.getDebt());
+        let totalCredit = bank + income;
+        let total = totalCredit - debt;
         let num = parseFloat(total);
         return num.toFixed(2);
     }
@@ -269,7 +271,8 @@ class User {
     }
 
     reCalculate(exchangeRate) {
-        this.bankAccount = billsBankAccount *exchangeRate;
+        let bank = parseInt(this.bankAccount)
+        this.bankAccount = bank *exchangeRate;
 
         for (const billInc of this.listOfIncome) {
             let newAmount = billInc.amount*exchangeRate;

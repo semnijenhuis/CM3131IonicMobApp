@@ -4,13 +4,12 @@
 
 }
 
-.centerRowItem{
+.centerRowItem {
     justify-content: space-evenly
 }
 
 
-
-.backgroundColor{
+.backgroundColor {
     background: #F7ECE1;
 
 }
@@ -22,26 +21,27 @@
     max-height: 150px;
 
 }
+
 /*ion-content {*/
 /*    padding-top: 80px; !* adjust the value as needed *!*/
 /*}*/
-.billScreen{
+.billScreen {
     --background: #F7ECE1;
 }
 
-.homeScreen{
+.homeScreen {
     --background: #ffffff;
 }
 
 
-.billsTopBar{
+.billsTopBar {
     height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.billList{
+.billList {
     padding: 20px;
 }
 
@@ -66,7 +66,7 @@
     color: #333;
 }
 
-.menuBar{
+.menuBar {
     --background: #ff8109;
 
 }
@@ -101,8 +101,7 @@ ion-card-header {
 }
 
 
-
-.modalHead{
+.modalHead {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     height: 180px;
     display: flex;
@@ -112,7 +111,7 @@ ion-card-header {
     line-height: 0.3;
 }
 
-.headerBills{
+.headerBills {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     height: 180px;
     display: flex;
@@ -150,7 +149,7 @@ ion-card-header {
     }
 }
 
-.progressBar{
+.progressBar {
     height: 20px;
 }
 

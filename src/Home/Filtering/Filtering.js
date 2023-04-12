@@ -1,4 +1,3 @@
-
 const UserScript = document.createElement('script');
 UserScript.src = '../../User.js';
 
@@ -19,11 +18,13 @@ customElements.define('page-one', class classOne extends HTMLElement {
         this.loadContent();
         this.loadScript();
     }
+
     async loadContent() {
         const response = await fetch('Income/Income.html');
         const html = await response.text();
         this.innerHTML = html;
     }
+
     async loadScript() {
         document.head.appendChild(UserScript);
         document.head.appendChild(billScript);
@@ -37,11 +38,13 @@ customElements.define('page-two', class classOne extends HTMLElement {
         this.loadContent();
         this.loadScript();
     }
+
     async loadContent() {
         const response = await fetch('Outgoing/Outgoing.html');
         const html = await response.text();
         this.innerHTML = html;
     }
+
     async loadScript() {
         document.head.appendChild(UserScript);
         document.head.appendChild(billScript);
@@ -50,17 +53,18 @@ customElements.define('page-two', class classOne extends HTMLElement {
 });
 
 
-
 customElements.define('page-three', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();
         this.loadScript();
     }
+
     async loadContent() {
         const response = await fetch('Result/Result.html');
         const html = await response.text();
         this.innerHTML = html;
     }
+
     async loadScript() {
         document.head.appendChild(UserScript);
         document.head.appendChild(billScript);

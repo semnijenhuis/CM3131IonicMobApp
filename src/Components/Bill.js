@@ -19,6 +19,19 @@ class Bill {
         this.payed = false;
     }
 
+    checkBill() {
+
+        if (
+            this.name === "" || this.name === null ||
+            this.amount === "" || this.amount === null ||
+            this.date === "" || this.date === null ||
+            this.category === "" || this.category === null || this.category === undefined
+        ) {
+            console.log("some items are still empty")
+            return true
+        }
+    }
+
     toJSON() {
         return {
             id: this.id,

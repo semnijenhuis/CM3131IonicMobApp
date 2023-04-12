@@ -1,5 +1,7 @@
 console.log("Incoming file started")
+
 let logedInUser = JSON.parse(localStorage.getItem("user"));
+let selectedCategory;
 
 const incomeIncomeList = document.getElementById('income-incomeList')
 
@@ -15,7 +17,7 @@ const incomeEditCancelButton = document.getElementById('income-edit-cancel-btn')
 const incomeBillNameInput = document.getElementById('income-bill-name');
 const incomeBillAmountInput = document.getElementById('income-bill-amount');
 const incomeBillDateInput = document.getElementById('income-bill-date');
-const incomeBillCategoryInput = document.getElementById('income-bill-category');
+
 
 const incomeBillEditIDInput = document.getElementById('income-edit-bill-id');
 const incomeBillEditBalanceInput = document.getElementById('income-edit-bill-bankBalance');
@@ -24,24 +26,29 @@ const incomeBillEditAmountInput = document.getElementById('income-edit-bill-amou
 const incomeBillEditDateInput = document.getElementById('income-edit-bill-date');
 const incomeBillEditCategoryInput = document.getElementById('income-edit-bill-category');
 
-const cancelButton =document.getElementById('cancel');
-
-cancelButton.addEventListener("click", backToHome)
-
-function backToHome(){
-    console.log("pressed to go back home")
-    window.location = "./../Home.html";
-}
-
-let selectedCategory;
 
 const categoryList = document.getElementById('categoryList')
 const categoryListEdit = document.getElementById('income-edit-bill-category')
 
+const cancelButton = document.getElementById('cancel');
+
+cancelButton.addEventListener("click", backToHome)
+
+function backToHome() {
+    console.log("pressed to go back home")
+    window.location = "./../Home.html";
+}
+
+categoryList.addEventListener('ionChange', (event) => {
+    // get the selected option's value
+    selectedCategory = event.target.value;
+    console.log(selectedCategory);
+});
+
 incomeConfirmButton.addEventListener("click", billConfirmed)
 incomeCancelButton.addEventListener("click", billCancel)
 
-incomeBillEditBalanceInput.addEventListener("input", function() {
+incomeBillEditBalanceInput.addEventListener("input", function () {
     logedInUser.bankAccount = incomeBillEditBalanceInput.value;
     localStorage.setItem("user", JSON.stringify(logedInUser));
 });
@@ -54,21 +61,27 @@ generateCategory(categoryList);
 generateCategory(categoryListEdit);
 
 
-
 function billConfirmed() {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
 
-    newBill = new Bill(incomeBillNameInput.value, incomeBillAmountInput.value, incomeBillDateInput.value, selectedCategory)
-    user.addIncome(newBill)
+    let newBill = new Bill(incomeBillNameInput.value, incomeBillAmountInput.value, incomeBillDateInput.value, selectedCategory)
+    if (!newBill.checkBill()) {
 
-    localStorage.setItem("user", JSON.stringify(user));
-    refreshIncomeList()
+        user.addIncome(newBill)
 
-    addIncomeModal.dismiss();
+        console.log(newBill)
+
+        localStorage.setItem("user", JSON.stringify(user));
+        refreshIncomeList()
+
+        addIncomeModal.dismiss();
+
+    }
+
 
 }
 
@@ -82,17 +95,20 @@ function billCancel() {
 function editBillConfirmed() {
 
 
-    newBill = new Bill(incomeBillEditNameInput.value, incomeBillEditAmountInput.value, incomeBillEditDateInput.value, incomeBillEditCategoryInput.value)
+    let newBill = new Bill(incomeBillEditNameInput.value, incomeBillEditAmountInput.value, incomeBillEditDateInput.value, incomeBillEditCategoryInput.value)
     newBill.id = incomeBillEditIDInput.value;
 
-    editBill(newBill)
+    if (!newBill.checkBill()) {
+        editBill(newBill)
 
-    localStorage.setItem("user", JSON.stringify(logedInUser));
+        localStorage.setItem("user", JSON.stringify(logedInUser));
 
 
-    refreshIncomeList()
+        refreshIncomeList()
 
-    editIncomeModal.dismiss();
+        editIncomeModal.dismiss();
+    }
+
 
 }
 
@@ -105,7 +121,7 @@ function editBillCancel() {
 
 function deleteBill(billToDelete) {
 
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills,logedInUser.currency)
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
     user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
     user.listOfCategoryBill = logedInUser.listOfCategoryBill
@@ -161,7 +177,7 @@ function generateIncomingList() {
             // create the item-price span and set its text content
             let itemPrice = document.createElement("span");
             itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency+" " + bill.amount;
+            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
 
             // append the item-date and item-price spans to the item-details span
             itemDetails.appendChild(itemDate);
@@ -182,6 +198,11 @@ function generateIncomingList() {
         }
     }
 
+}
+
+function refreshIncomeList() {
+    incomeIncomeList.innerHTML = ""; // clear the current list
+    generateIncomingList(); // call the function to generate the updated list
 }
 
 function openActionSheet(bill) {
@@ -235,27 +256,20 @@ function openActionSheet(bill) {
 
 }
 
-function refreshIncomeList() {
-    incomeIncomeList.innerHTML = ""; // clear the current list
-    generateIncomingList(); // call the function to generate the updated list
-}
-
-
-
 function generateCategory(list) {
-    for (let i = 0; i < logedInUser.listOfCategoryIncome.length; i++) {
-        let categoryElement = logedInUser.listOfCategoryIncome[i];
-        let ionItem = document.createElement("ion-select-option");
-        ionItem.innerText = categoryElement.name;
-        ionItem.value = categoryElement.name;
-        list.appendChild(ionItem);
+    if (list !== null) {
+        for (let i = 0; i < logedInUser.listOfCategoryIncome.length; i++) {
+            let categoryElement = logedInUser.listOfCategoryIncome[i];
+            let ionItem = document.createElement("ion-select-option");
+            ionItem.innerText = categoryElement.name;
+            ionItem.value = categoryElement.name;
+            list.appendChild(ionItem);
+        }
     }
 
+
 }
 
-categoryList.addEventListener('ionChange', (event) => {
-    // get the selected option's value
-    selectedCategory = event.target.value;
-    console.log(selectedCategory);
-});
+
+
 
