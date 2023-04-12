@@ -17,10 +17,15 @@ const billList = document.getElementById('billList')
 const billIncomeList = document.getElementById('bill-incomeList')
 
 
+
+
 const settingButton = document.getElementById('settings-account-btn');
 settingButton.addEventListener("click", startSettings);
 
-
+const overviewBtn = document.getElementById('settings-Overview-btn');
+overviewBtn.addEventListener('click', () => {
+    window.location.href ='Settings/Overview/Overview.html'
+});
 
 filterButton.addEventListener("click", startFilter);
 
@@ -51,18 +56,11 @@ function startSettings(){
     window.location.href = "Settings/Settings.html";
 }
 
-inflation('United States')
-    .then(result => {
-        // Do something with the result
-        console.log(result);
-    })
-    .catch(error => {
-        // Handle the error
-        console.error(error);
-    });
+
 
 generateBillList()
 generateIncomingList()
+
 
 
 
@@ -195,6 +193,9 @@ function addDebt(event, logedInUser, bill,) {
 
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
     user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
     const toggleElement = event.target;
 
     bill.payed = !toggleElement.checked;
@@ -213,6 +214,9 @@ function addIncome(event, logedInUser, bill,) {
 
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
     user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
     const toggleElement = event.target;
 
     bill.payed = !toggleElement.checked;
@@ -233,9 +237,10 @@ function addIncome(event, logedInUser, bill,) {
 
 function updateHeader() {
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills)
-
-
     user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+    user.calculate();
 
     greetingName.textContent = greetingName.textContent.replaceAll("@name", user.username)
     balanceName.textContent = balanceName.textContent.replaceAll("@amount", "€" + user.result)
@@ -244,6 +249,8 @@ function updateHeader() {
     billsIncome.textContent = billsIncome.textContent.replace("@amount", user.getIncome())
     billsBills.textContent = billsBills.textContent.replace("@amount",user.getDebt())
     billsResult.textContent = billsResult.textContent.replace("@amount",user.getResult())
+
+    localStorage.setItem("user", JSON.stringify(user));
 
 }
 
@@ -254,8 +261,29 @@ function deleteUser() {
 }
 
 
+// animatie progressbar
+const progressBar = document.getElementById('progressbar');
+animateProgressBar(progressBar, 75, 1000);
 
-// API's
+function animateProgressBar(progressBar, percentage, duration) {
+    const startValue = parseFloat(progressBar.getAttribute('value') || '0');
+    const endValue = percentage / 100;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        const value = startValue + progress * (endValue - startValue);
+
+        progressBar.setAttribute('value', value);
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
 
 
 
