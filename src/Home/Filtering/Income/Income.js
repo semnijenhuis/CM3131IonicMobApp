@@ -152,52 +152,62 @@ function editBill(billToEdit) {
 
 function generateIncomingList() {
 
+    // create the titles row
+    let titlesRow = document.createElement("ion-row");
+    let titlesName = document.createElement("ion-col");
+    titlesName.classList.add('align-middle');
+    titlesName.textContent = "Name";
+    let titlesAmount = document.createElement("ion-col");
+    titlesAmount.classList.add('align-middle');
+    titlesAmount.textContent = "Price";
+    let titlesPayed = document.createElement("ion-col");
+    titlesPayed.classList.add('align-middle');
+    titlesPayed.textContent = "";
+    titlesRow.appendChild(titlesName);
+    titlesRow.appendChild(titlesAmount);
+    titlesRow.appendChild(titlesPayed);
+    incomeIncomeList.appendChild(titlesRow);
 
-    if (logedInUser.listOfIncome) {
-        for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
-            let bill = logedInUser.listOfIncome[i];
+    for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
+        let bill = logedInUser.listOfIncome[i];
 
-            // create the ion-item
-            let ionItem = document.createElement("ion-item");
+        let name = document.createElement("h3");
+        name.textContent = bill.name;
 
+        let amount = document.createElement("p");
+        amount.textContent = logedInUser.currency + " " + bill.amount;
 
-            // create the h2 element and set its text content
-            let h2 = document.createElement("h2");
-            h2.textContent = bill.name;
+        // create the edit button
+        let editButton = document.createElement("ion-button");
+        editButton.setAttribute("id", "editBill" + i);
+        editButton.classList.add("small-button"); // add class for styling
+        editButton.addEventListener("click", function() {
+            openActionSheet(bill);
+        });
 
-            // create the item-details span
-            let itemDetails = document.createElement("span");
-            itemDetails.setAttribute("class", "item-details");
+        let editIcon = document.createElement("ion-icon");
+        editIcon.setAttribute("name", "create-outline");
+        editButton.appendChild(editIcon);
 
-            // create the item-date span and set its text content
-            let itemDate = document.createElement("span");
-            itemDate.setAttribute("class", "item-date");
-            itemDate.textContent = bill.date;
+        let colBillName = document.createElement("ion-col");
+        colBillName.classList.add('align-middle');
+        colBillName.appendChild(name);
 
-            // create the item-price span and set its text content
-            let itemPrice = document.createElement("span");
-            itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
+        let colBillAmount = document.createElement("ion-col");
+        colBillAmount.classList.add('align-middle');
+        colBillAmount.appendChild(amount);
 
-            // append the item-date and item-price spans to the item-details span
-            itemDetails.appendChild(itemDate);
-            itemDetails.appendChild(itemPrice);
+        let colBillEdit = document.createElement("ion-col");
+        // colBillEdit.classList.add('align-middle');
+        colBillEdit.appendChild(editButton);
 
+        let row = document.createElement("ion-row");
+        row.appendChild(colBillName);
+        row.appendChild(colBillAmount);
+        row.appendChild(colBillEdit);
 
-            ionItem.addEventListener("click", function (event) {
-                openActionSheet(bill);
-            });
-
-            // append the h2 and item-details to the ion-toggle
-            ionItem.appendChild(h2);
-            ionItem.appendChild(itemDetails);
-
-
-            // append the ion-item to the ion-list
-            incomeIncomeList.appendChild(ionItem);
-        }
+        incomeIncomeList.appendChild(row)
     }
-
 }
 
 function refreshIncomeList() {

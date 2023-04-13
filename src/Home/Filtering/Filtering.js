@@ -1,8 +1,8 @@
 const UserScript = document.createElement('script');
-UserScript.src = '../../User.js';
+UserScript.src = '../../Components/User.js';
 
 const billScript = document.createElement('script');
-billScript.src = '../../Bill.js';
+billScript.src = '../../Components/Bill.js';
 
 const incomeScript = document.createElement('script');
 incomeScript.src = 'Income/Income.js';
@@ -13,11 +13,20 @@ outGoingScript.src = 'Outgoing/Outgoing.js';
 const resultScript = document.createElement('script');
 resultScript.src = 'Result/Result.js';
 
+const GlobalCss = document.createElement('link');
+GlobalCss.rel = 'stylesheet';
+GlobalCss.href = '../../Components/GlobalStyle.css';
+
+
+
 customElements.define('page-one', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();
         this.loadScript();
+        this.loadCss();
     }
+
+
 
     async loadContent() {
         const response = await fetch('Income/Income.html');
@@ -30,6 +39,10 @@ customElements.define('page-one', class classOne extends HTMLElement {
         document.head.appendChild(billScript);
         this.appendChild(incomeScript);
     }
+    async loadCss() {
+        document.head.appendChild(GlobalCss);
+    }
+
 });
 
 

@@ -104,5 +104,14 @@ function getLogedIn() {
         mainHome();
     }
 
+    function mainHome(status) {
+        console.log("Home Started")
+        if (status === true) {
+            window.location = "./Home/Home.html";
+        } else {
+            window.location = "../Home/Home.html";
+        }
+    }
+
 
 }

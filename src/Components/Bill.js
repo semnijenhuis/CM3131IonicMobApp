@@ -44,4 +44,11 @@ class Bill {
 
 
 }
-module.exports = Bill;
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Bill;
+}
+
+// Browser export
+if (typeof window !== 'undefined') {
+    window.User = Bill;
+}

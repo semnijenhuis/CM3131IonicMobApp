@@ -1,155 +1,17 @@
-.topBarHeader {
-    height: 180px;
-    width: 90%;
-
+ion-toggle {
+    height: 24px; /* set the height to a fixed value, adjust as needed */
 }
 
-.centerRowItem {
-    justify-content: space-evenly
+.home-image {
+
+    max-width: 80%;
+    margin: 0 auto;
 }
 
+.home-button-container{
 
-.backgroundColor {
-    background: #F7ECE1;
-
-}
-
-
-.billCards {
-    --background: #F7ECE1;
-    max-width: 170px;
-    max-height: 150px;
-
-}
-
-/*ion-content {*/
-/*    padding-top: 80px; !* adjust the value as needed *!*/
-/*}*/
-.billScreen {
-    --background: #F7ECE1;
-}
-
-.homeScreen {
-    --background: #ffffff;
-}
-
-
-.billsTopBar {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.billList {
-    padding: 20px;
-}
-
-.item-details {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: auto;
-    padding-right: 16px;
-}
-
-.item-date {
-    font-size: 12px;
-    color: #999;
-    margin-right: 16px;
-}
-
-.item-price {
-    font-weight: bold;
-    font-size: 16px;
-    color: #333;
-}
-
-.menuBar {
-    --background: #ff8109;
-
-}
-
-
-.container {
-
-    display: flex;
-    flex: 1.2;
-    overflow-x: auto;
-    width: 100vw;
-    justify-content: flex-start;
-}
-
-.billCards {
-    display: inline-block;
-    margin-right: 1rem;
-    width: 300px;
-}
-
-ion-scroll {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
-
-ion-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-}
-
-
-.modalHead {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --background: #F7ECE1;
-    line-height: 0.3;
-}
-
-.headerBills {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --background: #ffffff;
-    line-height: 0.3;
-}
-
-.my-action-sheet {
-    --background: #f5f5f5;
-    --button-color: #000;
-    --button-background-color: #fff;
-    --button-border-color: #ccc;
-    --button-border-radius: 0;
-}
-
-.my-progress-bar {
-    animation: float 1s ease-in-out infinite;
-    padding: 15px;
-    border-radius: 20px;
-    height: 20px;
-}
-
-
-@keyframes float {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(0, -5px);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-.progressBar {
-    height: 20px;
-}
-

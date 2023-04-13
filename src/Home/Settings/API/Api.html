@@ -11,12 +11,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
     <link rel="stylesheet" href="Api.css">
+    <link rel="stylesheet" href="../../../Components/GlobalStyle.css">
 
 </head>
 
 <body>
 <ion-app>
-    <ion-content>
+    <ion-header>
+        <ion-toolbar class="Global-Header">
+            <ion-buttons slot="start">
+                <ion-button id="cancel" class="Global-BackButton">
+                    <ion-icon class="Global-BackButton" slot="start" name="arrow-back"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Api Calls</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content class="Global-BackGround">
+
 
         <ion-card>
             <ion-card-header>
@@ -77,15 +91,13 @@
                 </ion-grid>
             </ion-card-content>
         </ion-card>
-
-
-        <ion-button id="cancel"> Cancel</ion-button>
     </ion-content>
 </ion-app>
 
 
 <script src="Api.js"></script>
 <script src="../../../Components/User.js"></script>
+<script src="../../../Components/GlobalStyle.css"></script>
 </body>
 
 

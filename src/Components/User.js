@@ -306,4 +306,12 @@ class User {
 
 }
 
-module.exports = User;
+// Node.js export
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = User;
+}
+
+// Browser export
+if (typeof window !== 'undefined') {
+    window.User = User;
+}

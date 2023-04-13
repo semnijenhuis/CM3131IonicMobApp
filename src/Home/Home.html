@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
     <title>Document</title>
+    <link rel="stylesheet" href="../Components/GlobalStyle.css">
     <link rel="stylesheet" href="Home.css">
 
 
@@ -26,63 +27,67 @@
         <ion-tab id="tb-btn-home" tab="Home">
 
 
-            <ion-toolbar class="modalHead">
+            <ion-toolbar class="Global-Header">
                 <p align="center" id="lbl-greeting">Hi, @name</p>
                 <p align="center">Your total balance is</p>
                 <p align="center" id="lbl-balance">@amount</p>
             </ion-toolbar>
 
 
-            <ion-content class="homeScreen">
-
-                <ion-img src="../Image/loginImage.png"></ion-img>
-                <ion-button id="startFilter" expand="block">Start filtering</ion-button>
-
-
+            <ion-content class="Global-BackGround">
+                <ion-img class="home-image" src="../Image/loginImage.png"></ion-img>
+                <div class="home-button-container">
+                    <ion-button class="Global-Button" id="startFilter">Start filtering</ion-button>
+                </div>
             </ion-content>
         </ion-tab>
 
         <!--        settingsScreen-->
         <ion-tab id="tb-btn-settings" tab="Settings">
 
-            <ion-toolbar class="modalHead">
+            <ion-toolbar class="Global-Header">
                 <p align="center">Settings</p>
             </ion-toolbar>
 
-
-            <ion-content class="settingScreen">
-
-                <ion-button id="settings-API-btn" expand="block">API</ion-button>
-                <ion-button id="settings-Overview-btn" expand="block">Overview</ion-button>
-                <ion-button id="settings-logOut-btn" expand="block">Log out</ion-button>
-
+            <ion-content class="Global-BackGround">
+                <ion-grid>
+                    <ion-row justify-content-center align-items-center>
+                        <ion-col size="12" size-md="4">
+                            <ion-button class="Global-Button" id="settings-API-btn" expand="block">API</ion-button>
+                        </ion-col>
+                        <ion-col size="12" size-md="4">
+                            <ion-button class="Global-Button" id="settings-Overview-btn" expand="block">Overview</ion-button>
+                        </ion-col>
+                        <ion-col size="12" size-md="4">
+                            <ion-button class="Global-Button" id="settings-logOut-btn" expand="block">Log out</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-content>
 
         </ion-tab>
 
         <ion-tab id="tb-btn-settings" tab="Bills">
 
-            <ion-toolbar class="headerBills">
+            <ion-toolbar class="Global-Header">
                 <p align="center">Bills</p>
 
                 <ion-grid align="center">
                     <ion-row>
-
-
-                        <ion-col>
+                        <ion-col style="line-height: 0.4;">
                             <p>Bank account</p>
                             <p>Income</p>
                             <p>Bills</p>
                             <p>Result</p>
                         </ion-col>
-                        <ion-col>
+                        <ion-col style="line-height: 0.4;">
                             <p id="currencyID1">€</p>
                             <p id="currencyID2">€</p>
                             <p id="currencyID3">€</p>
                             <p id="currencyID4">€</p>
                         </ion-col>
 
-                        <ion-col>
+                        <ion-col style="line-height: 0.4;">
                             <p id="bills-bankaccount">@amount</p>
                             <p id="bills-income">@amount</p>
                             <p id="bills-bills">@amount</p>
@@ -91,15 +96,18 @@
                         </ion-col>
 
                     </ion-row>
+
+
                 </ion-grid>
 
 
             </ion-toolbar>
 
-            <ion-content class="billScreen">
+            <ion-content class="Global-BackGround">
 
 
-                <ion-card class="contentCard">
+
+                <ion-card class="Global-Card">
                     <ion-card-content>
 
                         <ion-list id="billList">
@@ -111,7 +119,7 @@
 
                 </ion-card>
 
-                <ion-card class="contentCard">
+                <ion-card class="Global-Card">
                     <ion-card-content>
 
                         <ion-list id="bill-incomeList">
@@ -163,6 +171,6 @@
 <script src="Home.js"></script>
 <script src="../Components/User.js"></script>
 <script src="../Components/Bill.js"></script>
-<script src="../Components/TestCategory.js"></script>
+<script src="../Components/Category.js"></script>
 
 </html>

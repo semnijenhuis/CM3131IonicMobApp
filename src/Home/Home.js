@@ -1,5 +1,5 @@
 // Home screen
-
+let logedInUser = JSON.parse(localStorage.getItem("user"));
 
 const greetingName = document.getElementById('lbl-greeting');
 const balanceName = document.getElementById('lbl-balance');
@@ -22,37 +22,36 @@ const billList = document.getElementById('billList')
 const billIncomeList = document.getElementById('bill-incomeList')
 
 
-logOut.addEventListener("click", deleteUser);
-
 
 const overviewBtn = document.getElementById('settings-Overview-btn');
 const apiBtn = document.getElementById('settings-API-btn');
 
-overviewBtn.addEventListener('click', () => {
-    window.location.href = 'Settings/Overview/Overview.html'
-});
+    logOut.addEventListener("click", deleteUser);
 
-apiBtn.addEventListener('click', () => {
-    window.location.href = 'Settings/API/Api.html'
-});
+    overviewBtn.addEventListener('click', () => {
+        window.location.href = 'Settings/Overview/Overview.html'
+    });
 
-filterButton.addEventListener("click", startFilter);
+    apiBtn.addEventListener('click', () => {
+        window.location.href = 'Settings/API/Api.html'
+    });
+
+    filterButton.addEventListener("click", startFilter);
+
+    billsBankAccount.innerText = logedInUser.bankAccount
 
 
-let logedInUser = JSON.parse(localStorage.getItem("user"));
-let debt = logedInUser.debt;
 
-billsBankAccount.innerText = logedInUser.bankAccount
+
+
+
+
+
+
+
+
 console.log("Home file started")
 
-function mainHome(status) {
-    console.log("Home Started")
-    if (status === true) {
-        window.location = "./Home/Home.html";
-    } else {
-        window.location = "../Home/Home.html";
-    }
-}
 
 
 function startFilter() {
@@ -65,122 +64,132 @@ generateIncomingList()
 
 
 function generateBillList() {
+    // create the titles row
+    let titlesRow = document.createElement("ion-row");
+    let titlesName = document.createElement("ion-col");
+    titlesName.classList.add('align-middle');
+    titlesName.textContent = "Name";
+    let titlesAmount = document.createElement("ion-col");
+    titlesAmount.classList.add('align-middle');
+    titlesAmount.textContent = "Price";
+    let titlesPayed = document.createElement("ion-col");
+    titlesPayed.classList.add('align-middle');
+    titlesPayed.textContent = "Payed";
+    titlesRow.appendChild(titlesName);
+    titlesRow.appendChild(titlesAmount);
+    titlesRow.appendChild(titlesPayed);
+    billList.appendChild(titlesRow);
 
-
-    console.log(logedInUser.listOfBills.length)
-
+    // create a row for each bill
     for (let i = 0; i < logedInUser.listOfBills.length; i++) {
         let bill = logedInUser.listOfBills[i];
 
-        // create the ion-item
-        let ionItem = document.createElement("ion-item");
+        let name = document.createElement("h3");
+        name.textContent = bill.name;
+
+        let amount = document.createElement("p");
+        amount.textContent = logedInUser.currency + " " + bill.amount;
 
         // create the ion-toggle
-        let ionToggle = document.createElement("ion-toggle");
-        ionToggle.setAttribute("id", "logOut" + i);
+        let payedToggle = document.createElement("ion-toggle");
+        payedToggle.setAttribute("id", "logOut" + i);
+
+        let toggleLabel = document.createElement("ion-label");
+        payedToggle.setAttribute("aria-label", "");
+        payedToggle.appendChild(toggleLabel);
 
         if (bill.payed) {
-            ionToggle.checked = true;
+            payedToggle.checked = true;
         }
 
-
-        // create the h2 element and set its text content
-        let h2 = document.createElement("h2");
-        h2.textContent = bill.name;
-
-        // create the item-details span
-        let itemDetails = document.createElement("span");
-        itemDetails.setAttribute("class", "item-details");
-
-        // create the item-date span and set its text content
-        let itemDate = document.createElement("span");
-        itemDate.setAttribute("class", "item-date");
-        itemDate.textContent = bill.date;
-
-        // create the item-price span and set its text content
-        let itemPrice = document.createElement("span");
-        itemPrice.setAttribute("class", "item-price");
-        itemPrice.textContent = logedInUser.currency + " " + bill.amount;
-
-        // append the item-date and item-price spans to the item-details span
-        itemDetails.appendChild(itemDate);
-        itemDetails.appendChild(itemPrice);
-
-
-        ionToggle.addEventListener("click", function (event) {
+        payedToggle.addEventListener("click", function (event) {
             addDebt(event, logedInUser, bill);
         });
 
-        // append the h2 and item-details to the ion-toggle
-        ionToggle.appendChild(h2);
-        ionToggle.appendChild(itemDetails);
+        let colBillName = document.createElement("ion-col");
+        colBillName.classList.add('align-middle');
+        colBillName.appendChild(name);
 
-        // append the ion-toggle to the ion-item
-        ionItem.appendChild(ionToggle);
+        let colBillAmount = document.createElement("ion-col");
+        colBillAmount.classList.add('align-middle');
+        colBillAmount.appendChild(amount);
 
-        // append the ion-item to the ion-list
-        billList.appendChild(ionItem);
+        let colBillPayed = document.createElement("ion-col");
+        colBillPayed.classList.add('align-middle');
+        colBillPayed.appendChild(payedToggle);
+
+        let row = document.createElement("ion-row");
+        row.appendChild(colBillName);
+        row.appendChild(colBillAmount);
+        row.appendChild(colBillPayed);
+
+        billList.appendChild(row)
     }
-
-
 }
 
 function generateIncomingList() {
 
-    console.log(logedInUser.listOfIncome.length)
+    // create the titles row
+    let titlesRow = document.createElement("ion-row");
+    let titlesName = document.createElement("ion-col");
+    titlesName.classList.add('align-middle');
+    titlesName.textContent = "Name";
+    let titlesAmount = document.createElement("ion-col");
+    titlesAmount.classList.add('align-middle');
+    titlesAmount.textContent = "Price";
+    let titlesPayed = document.createElement("ion-col");
+    titlesPayed.classList.add('align-middle');
+    titlesPayed.textContent = "Received";
+    titlesRow.appendChild(titlesName);
+    titlesRow.appendChild(titlesAmount);
+    titlesRow.appendChild(titlesPayed);
+    billIncomeList.appendChild(titlesRow);
 
     for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
         let bill = logedInUser.listOfIncome[i];
 
-        // create the ion-item
-        let ionItem = document.createElement("ion-item");
+        let name = document.createElement("h3");
+        name.textContent = bill.name;
+
+        let amount = document.createElement("p");
+        amount.textContent = logedInUser.currency + " " + bill.amount;
 
         // create the ion-toggle
-        let ionToggle = document.createElement("ion-toggle");
-        ionToggle.setAttribute("id", "logOut" + i);
+        let payedToggle = document.createElement("ion-toggle");
+        payedToggle.setAttribute("id", "logOut" + i);
+
+        let toggleLabel = document.createElement("ion-label");
+        payedToggle.setAttribute("aria-label", "");
+        payedToggle.appendChild(toggleLabel);
 
         if (bill.payed) {
-            ionToggle.checked = true;
+            payedToggle.checked = true;
         }
 
-
-        // create the h2 element and set its text content
-        let h2 = document.createElement("h2");
-        h2.textContent = bill.name;
-
-        // create the item-details span
-        let itemDetails = document.createElement("span");
-        itemDetails.setAttribute("class", "item-details");
-
-        // create the item-date span and set its text content
-        let itemDate = document.createElement("span");
-        itemDate.setAttribute("class", "item-date");
-        itemDate.textContent = bill.date;
-
-        // create the item-price span and set its text content
-        let itemPrice = document.createElement("span");
-        itemPrice.setAttribute("class", "item-price");
-        itemPrice.textContent = logedInUser.currency + " " + bill.amount;
-
-        // append the item-date and item-price spans to the item-details span
-        itemDetails.appendChild(itemDate);
-        itemDetails.appendChild(itemPrice);
-
-
-        ionToggle.addEventListener("click", function (event) {
+        payedToggle.addEventListener("click", function (event) {
             addIncome(event, logedInUser, bill);
         });
 
-        // append the h2 and item-details to the ion-toggle
-        ionToggle.appendChild(h2);
-        ionToggle.appendChild(itemDetails);
+        let colBillName = document.createElement("ion-col");
+        colBillName.classList.add('align-middle');
+        colBillName.appendChild(name);
 
-        // append the ion-toggle to the ion-item
-        ionItem.appendChild(ionToggle);
+        let colBillAmount = document.createElement("ion-col");
+        colBillAmount.classList.add('align-middle');
+        colBillAmount.appendChild(amount);
 
-        // append the ion-item to the ion-list
-        billIncomeList.appendChild(ionItem);
+        let colBillPayed = document.createElement("ion-col");
+        colBillPayed.classList.add('align-middle');
+        colBillPayed.appendChild(payedToggle);
+
+        let row = document.createElement("ion-row");
+        row.appendChild(colBillName);
+        row.appendChild(colBillAmount);
+        row.appendChild(colBillPayed);
+
+        billIncomeList.appendChild(row)
     }
+
 
 }
 

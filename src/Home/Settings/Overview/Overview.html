@@ -11,22 +11,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
     <link rel="stylesheet" href="Overview.css">
+    <link rel="stylesheet" href="../../../Components/GlobalStyle.css">
 
 </head>
 
 <body>
+
 <ion-app>
     <ion-header>
-        <ion-toolbar color="primary">
-            <ion-buttons>
-                <ion-back-button>Back</ion-back-button>
+        <ion-toolbar class="Global-Header">
+            <ion-buttons slot="start">
+                <ion-button id="cancel" class="Global-BackButton">
+                    <ion-icon class="Global-BackButton" slot="start" name="arrow-back"></ion-icon>
+                </ion-button>
             </ion-buttons>
-            <ion-title> Overview</ion-title>
+            <ion-title>Category overview</ion-title>
         </ion-toolbar>
     </ion-header>
 
 
-    <ion-content>
+    <ion-content class="Global-BackGround">
 
         <ion-card class="contentCard">
 
@@ -69,7 +73,6 @@
         </ion-card>
     </ion-content>
 
-    <ion-button id="cancel"> Cancel</ion-button>
 
 </ion-app>
 

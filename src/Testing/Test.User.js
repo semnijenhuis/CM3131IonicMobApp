@@ -49,7 +49,7 @@ function testUser() {
     user.addBill({id: 4, category: "Transportation", amount: 200, payed: false});
     console.assert(parseInt(user.getTotalBill()) === 700, "Error: getTotalBill method not working");
 
-    console.log("Test succeed - Bill")
+    console.log("Test succeed - User")
 }
 
 module.exports = { testUser };

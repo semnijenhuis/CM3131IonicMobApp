@@ -19,4 +19,11 @@ class Category {
 
 
 }
-module.exports = Category;
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Category;
+}
+
+// Browser export
+if (typeof window !== 'undefined') {
+    window.User = Category;
+}
