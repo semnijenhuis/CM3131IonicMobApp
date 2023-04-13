@@ -81,7 +81,6 @@ class User {
         this.listOfIncome.push(bill)
         this.addCategoryIncome(bill)
         this.calculate();
-        console.log("add bill runn")
 
     }
     deleteIncomeBill(incomeBill){
@@ -89,9 +88,9 @@ class User {
         if (index !== -1) {
             this.listOfIncome.splice(index, 1);
             this.removeCategoryIncome(incomeBill)
-            console.log('Income bill deleted:', incomeBill);
+            // console.log('Income bill deleted:', incomeBill);
         } else {
-            console.log('Income bill not found:', incomeBill);
+            // console.log('Income bill not found:', incomeBill);
         }
         this.calculate();
     }
@@ -100,16 +99,15 @@ class User {
         this.listOfBills.push(bill);
         this.addCategoryBill(bill)
         this.calculate();
-        console.log("add bill runn")
     }
     deleteOutgoingBill(incomeBill){
         const index = this.listOfBills.findIndex(bill => bill.id === incomeBill.id);
         if (index !== -1) {
             this.listOfBills.splice(index, 1);
             this.removeCategoryBill(incomeBill)
-            console.log('Income bill deleted:', incomeBill);
+            // console.log('Income bill deleted:', incomeBill);
         } else {
-            console.log('Income bill not found:', incomeBill);
+            // console.log('Income bill not found:', incomeBill);
         }
         this.calculate();
     }
@@ -138,6 +136,7 @@ class User {
     }
 
     addCategoryBill(bill){
+
         for (let i = 0; i < this.listOfCategoryBill.length; i++) {
             let foundCategory = this.listOfCategoryBill[i];
             if (foundCategory.name === bill.category) {
@@ -306,3 +305,5 @@ class User {
 
 
 }
+
+module.exports = User;

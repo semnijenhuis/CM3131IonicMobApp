@@ -1,8 +1,8 @@
 class Category {
 
     name;
-    amount;
-    percentage;
+    amount = 0;
+    percentage= 0;
 
     constructor(name) {
         this.name = name;
@@ -19,3 +19,4 @@ class Category {
 
 
 }
+module.exports = Category;

@@ -27,7 +27,6 @@ class Bill {
             this.date === "" || this.date === null ||
             this.category === "" || this.category === null || this.category === undefined
         ) {
-            console.log("some items are still empty")
             return true
         }
     }
@@ -45,3 +44,4 @@ class Bill {
 
 
 }
+module.exports = Bill;
