@@ -41,101 +41,88 @@ function generateIncomingList() {
 
     let logedInUser = JSON.parse(localStorage.getItem("user"));
 
+    // create the titles row
+    let titlesRow = document.createElement("ion-row");
+    let titlesName = document.createElement("ion-col");
+    titlesName.classList.add('align-middle');
+    titlesName.textContent = "Name";
+    let titlesAmount = document.createElement("ion-col");
+    titlesAmount.classList.add('align-middle');
+    titlesAmount.textContent = "Price";
 
-    if (logedInUser.listOfIncome) {
-        for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
-            let bill = logedInUser.listOfIncome[i];
+    titlesRow.appendChild(titlesName);
+    titlesRow.appendChild(titlesAmount);
+    // titlesRow.appendChild(titlesPayed);
+    incomeIncomeList.appendChild(titlesRow);
 
-            // create the ion-item
-            let ionItem = document.createElement("ion-item");
+    for (let i = 0; i < logedInUser.listOfIncome.length; i++) {
+        let bill = logedInUser.listOfIncome[i];
 
+        let name = document.createElement("h3");
+        name.textContent = bill.name;
 
-            // create the h2 element and set its text content
-            let h2 = document.createElement("h2");
-            h2.textContent = bill.name;
+        let amount = document.createElement("p");
+        amount.textContent = logedInUser.currency + " " + bill.amount;
 
-            // create the item-details span
-            let itemDetails = document.createElement("span");
-            itemDetails.setAttribute("class", "item-details");
+        let colBillName = document.createElement("ion-col");
+        colBillName.classList.add('align-middle');
+        colBillName.appendChild(name);
 
-            // create the item-date span and set its text content
-            let itemDate = document.createElement("span");
-            itemDate.setAttribute("class", "item-date");
-            itemDate.textContent = bill.date;
-
-            // create the item-price span and set its text content
-            let itemPrice = document.createElement("span");
-            itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
-
-            // append the item-date and item-price spans to the item-details span
-            itemDetails.appendChild(itemDate);
-            itemDetails.appendChild(itemPrice);
-
-
-            ionItem.addEventListener("click", function (event) {
-                openActionSheet(bill);
-            });
-
-            // append the h2 and item-details to the ion-toggle
-            ionItem.appendChild(h2);
-            ionItem.appendChild(itemDetails);
+        let colBillAmount = document.createElement("ion-col");
+        colBillAmount.classList.add('align-middle');
+        colBillAmount.appendChild(amount);
 
 
-            // append the ion-item to the ion-list
-            totalIncomeList.appendChild(ionItem);
-        }
+        let row = document.createElement("ion-row");
+        row.appendChild(colBillName);
+        row.appendChild(colBillAmount);
+        totalIncomeList.appendChild(row)
     }
 
 }
 
 function generateBillList() {
+
+
     let storageUser = JSON.parse(localStorage.getItem("user"));
 
-    if (storageUser.listOfBills) {
-        for (let i = 0; i < storageUser.listOfBills.length; i++) {
-            let bill = storageUser.listOfBills[i];
+    // create the titles row
+    let titlesRow = document.createElement("ion-row");
+    let titlesName = document.createElement("ion-col");
+    titlesName.classList.add('align-middle');
+    titlesName.textContent = "Name";
+    let titlesAmount = document.createElement("ion-col");
+    titlesAmount.classList.add('align-middle');
+    titlesAmount.textContent = "Price";
+    titlesRow.appendChild(titlesName);
+    titlesRow.appendChild(titlesAmount);
+    outgoingBillList.appendChild(titlesRow);
 
-            // create the ion-item
-            let ionItem = document.createElement("ion-item");
+    for (let i = 0; i < logedInUser.listOfBills.length; i++) {
+        let bill = logedInUser.listOfBills[i];
 
+        let name = document.createElement("h3");
+        name.textContent = bill.name;
 
-            // create the h2 element and set its text content
-            let h2 = document.createElement("h2");
-            h2.textContent = bill.name;
+        let amount = document.createElement("p");
+        amount.textContent = logedInUser.currency + " " + bill.amount;
 
-            // create the item-details span
-            let itemDetails = document.createElement("span");
-            itemDetails.setAttribute("class", "item-details");
+        let colBillName = document.createElement("ion-col");
+        colBillName.classList.add('align-middle');
+        colBillName.appendChild(name);
 
-            // create the item-date span and set its text content
-            let itemDate = document.createElement("span");
-            itemDate.setAttribute("class", "item-date");
-            itemDate.textContent = bill.date;
+        let colBillAmount = document.createElement("ion-col");
+        colBillAmount.classList.add('align-middle');
+        colBillAmount.appendChild(amount);
 
-            // create the item-price span and set its text content
-            let itemPrice = document.createElement("span");
-            itemPrice.setAttribute("class", "item-price");
-            itemPrice.textContent = logedInUser.currency + " " + bill.amount;
-
-            // append the item-date and item-price spans to the item-details span
-            itemDetails.appendChild(itemDate);
-            itemDetails.appendChild(itemPrice);
-
-
-            ionItem.addEventListener("click", function (event) {
-                openActionSheet(bill);
-            });
-
-            // append the h2 and item-details to the ion-toggle
-            ionItem.appendChild(h2);
-            ionItem.appendChild(itemDetails);
+        let row = document.createElement("ion-row");
+        row.appendChild(colBillName);
+        row.appendChild(colBillAmount);
 
 
-            // append the ion-item to the ion-list
-            totalBillList.appendChild(ionItem);
-        }
+        totalBillList.appendChild(row)
     }
+
 
 }
 

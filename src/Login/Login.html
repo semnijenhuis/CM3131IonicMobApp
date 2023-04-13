@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
     <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="../Components/GlobalStyle.css">
 
 </head>
 <body>
@@ -34,15 +35,11 @@
 
         </ion-row>
 
-
+        <ion-button class="Global-Button" id="open-login" expand="full">Login</ion-button>
         <ion-row class="centerRowItem">
-            <ion-button class="login-btn" id="open-login" expand="block">Login</ion-button>
+
         </ion-row>
 
-
-        <ion-row class="centerRowItem">
-            <ion-button class="register-btn" id="open-modal" expand="block">Register</ion-button>
-        </ion-row>
 
     </ion-grid>
 
@@ -57,61 +54,26 @@
 
         <ion-modal trigger="open-login" initial-breakpoint="0.60" class="modalStyle">
 
-            <div class="padding">
+            <ion-card>
 
 
-                <ion-content class="modalStyleItem">
-                    <ion-grid>
+                <ion-card-content>
+                    <ion-row class="centerRowItem">
+                        <h1>Let's login</h1>
+                    </ion-row>
+                    <form>
+                        <ion-item>
+                            <ion-input label-placement="floating" label="Username" value="" id="username-input"></ion-input>
+                        </ion-item>
 
-                        <ion-row class="centerRowItem">
-                            <h1>Let's login</h1>
-                        </ion-row>
-
-                        <ion-row>
-                            <form>
-                                <ion-item>
-                                    <ion-input label-placement="floating" label="Username" value="" id="username-input"></ion-input>
-                                </ion-item>
-
-                                <ion-item>
-                                    <ion-input label-placement="floating" label="Password" type="password" value="" id="password-input"></ion-input>
-                                </ion-item>
-                                <ion-toast id="empty-fields-toast" message="Username and/or password can't be empty" duration="3000"></ion-toast>
-                                <ion-button expand="block" id="logIn">Log In</ion-button>
-                            </form>
-
-
-                        </ion-row>
-
-
-                        <ion-row class="centerRowItem">
-                            <p>Or continue with</p>
-                        </ion-row>
-
-
-                        <ion-row>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="apple-login" expand="block">
-                                    <ion-icon name="logo-apple"></ion-icon>
-                                </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="google-login" expand="block">
-                                    <ion-icon name="logo-google"></ion-icon>
-                                </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button class="icon-btn" id="facebook-login" expand="block">
-                                    <ion-icon name="logo-facebook"></ion-icon>
-                                </ion-button>
-                            </ion-col>
-                        </ion-row>
-
-
-                    </ion-grid>
-
-                </ion-content>
-            </div>
+                        <ion-item>
+                            <ion-input label-placement="floating" label="Password" type="password" value="" id="password-input"></ion-input>
+                        </ion-item>
+                        <ion-toast id="empty-fields-toast" message="Username and/or password can't be empty" duration="3000"></ion-toast>
+                        <ion-button class="Global-Button" expand="full" id="logIn">Log In</ion-button>
+                    </form>
+                </ion-card-content>
+            </ion-card>
 
 
         </ion-modal>

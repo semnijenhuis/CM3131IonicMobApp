@@ -15,11 +15,8 @@ function mainLogin() {
 
 
 function getLogedIn() {
-    // const username = usernameInput.value;
-    // const password = passwordInput.value;
-
-    const username = "sem";
-    const password = "password"
+    const username = usernameInput.value;
+    const password = passwordInput.value;
 
 
     if (username === "" || password === "") {
