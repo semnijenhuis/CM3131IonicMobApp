@@ -23,7 +23,14 @@ class Bill {
             this.date === "" || this.date === null ||
             this.category === "" || this.category === null || this.category === undefined
         ) {
+            console.log(this.name)
+            console.log(this.amount)
+            console.log(this.date)
+            console.log(this.category)
             return true
+        }
+        else {
+            return false
         }
     }
 

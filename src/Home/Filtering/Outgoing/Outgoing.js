@@ -1,4 +1,5 @@
 let selectedCategoryOutgoing;
+let logedInUser2 = JSON.parse(localStorage.getItem("user"));
 
 // All lists
 const outgoingBillList = document.getElementById('outgoing-incomeList')
@@ -24,7 +25,10 @@ const outgoingBillEditNameInput = document.getElementById('outgoing-edit-bill-na
 const outgoingBillEditAmountInput = document.getElementById('outgoing-edit-bill-amount');
 const outgoingBillEditDateInput = document.getElementById('outgoing-edit-bill-date');
 
-
+categoryList.addEventListener('ionChange', (event) => {
+    // get the selected option's value
+    selectedCategory = event.target.value;
+});
 outgoingConfirmButton.addEventListener("click", billConfirmed)
 outgoingCancelButton.addEventListener("click", billCancel)
 outgoingEditConfirmButton.addEventListener("click", editBillConfirmed)
@@ -41,8 +45,8 @@ generateCategoryOutgoingEdit();
 
 // Generates the list based on the user data
 function generateCategoryOutgoing() {
-    for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
-        let categoryElement = logedInUser.listOfCategoryBill[i];
+    for (let i = 0; i < logedInUser2.listOfCategoryBill.length; i++) {
+        let categoryElement = logedInUser2.listOfCategoryBill[i];
         let ionItem = document.createElement("ion-select-option");
         ionItem.innerText = categoryElement.name;
         ionItem.value = categoryElement.name;
@@ -80,14 +84,14 @@ function generateBillList() {
     titlesRow.appendChild(titlesPayed);
     outgoingBillList.appendChild(titlesRow);
 
-    for (let i = 0; i < logedInUser.listOfBills.length; i++) {
-        let bill = logedInUser.listOfBills[i];
+    for (let i = 0; i < storageUser.listOfBills.length; i++) {
+        let bill = storageUser.listOfBills[i];
 
         let name = document.createElement("h3");
         name.textContent = bill.name;
 
         let amount = document.createElement("p");
-        amount.textContent = logedInUser.currency + " " + bill.amount;
+        amount.textContent = storageUser.currency + " " + bill.amount;
 
         // create the edit button
         let editButton = document.createElement("ion-button");
@@ -131,16 +135,17 @@ function billConfirmed() {
     let storageUser = JSON.parse(localStorage.getItem("user"));
 
     let user = new User(storageUser.username, storageUser.password, storageUser.listOfIncome, storageUser.listOfBills, storageUser.currency)
-    user.bankAccount = logedInUser.bankAccount
-    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
-    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+    user.bankAccount = logedInUser2.bankAccount
+    user.listOfCategoryIncome = logedInUser2.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser2.listOfCategoryBill
 
     newBill = new Bill(outgoingBillNameInput.value, outgoingBillAmountInput.value, outgoingBillDateInput.value, selectedCategoryOutgoing)
 
     if (!newBill.checkBill()) {
         user.addBill(newBill)
         localStorage.setItem("user", JSON.stringify(user));
-        refreshIncomeList()
+
+        refreshOutgoingList()
         addOutgoingModal.dismiss();
     }
 
@@ -149,46 +154,52 @@ function billConfirmed() {
 
 function editBillConfirmed() {
 
-    let storageUser = JSON.parse(localStorage.getItem("user"));
-
-    newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, selectedCategoryOutgoing)
+    let newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, categoryListOutgoingEdit.value)
     newBill.id = outgoingBillEditIDInput.value;
+
     if (!newBill.checkBill()) {
+
         editBill(newBill)
-        localStorage.setItem("user", JSON.stringify(storageUser));
-        refreshIncomeList()
+
+        localStorage.setItem("user", JSON.stringify(logedInUser2));
+        refreshOutgoingList()
+
         editOutgoingModal.dismiss();
     }
+
+
+
 }
 
 
 // Deletes a new bill
 function deleteBill(billToDelete) {
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
-    user.bankAccount = logedInUser.bankAccount
-    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
-    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+    let user = new User(logedInUser2.username, logedInUser2.password, logedInUser2.listOfIncome, logedInUser2.listOfBills, logedInUser2.currency)
+    user.bankAccount = logedInUser2.bankAccount
+    user.listOfCategoryIncome = logedInUser2.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser2.listOfCategoryBill
 
     user.deleteOutgoingBill(billToDelete)
 
-    localStorage.setItem("user", JSON.stringify(logedInUser));
+    localStorage.setItem("user", JSON.stringify(logedInUser2));
     refreshIncomeList();
 }
 
 function editBill(billToEdit) {
 
-    let storageUser = JSON.parse(localStorage.getItem("user"));
+    // let storageUser = JSON.parse(localStorage.getItem("user"));
     // Iterate through the listOfBills array
-    storageUser.listOfBills.forEach((bill, index) => {
+    logedInUser2.listOfBills.forEach((bill, index) => {
         // If the bill has the same id as billToEdit, update it
         if (bill.id === billToEdit.id) {
-            storageUser.listOfBills[index] = billToEdit;
+            logedInUser2.listOfBills[index] = billToEdit;
         }
     });
 
+
     // save the updated user object back to local storage
-    localStorage.setItem("user", JSON.stringify(storageUser));
-    refreshIncomeList();
+    localStorage.setItem("user", JSON.stringify(logedInUser2));
+    refreshOutgoingList()
 }
 
 
@@ -203,7 +214,7 @@ function editBillCancel() {
 
 
 // Refresh list and edit a bill
-function refreshIncomeList() {
+function refreshOutgoingList() {
     outgoingBillList.innerHTML = ""; // clear the current list
     generateBillList(); // call the function to generate the updated list
 }
