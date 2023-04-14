@@ -1,24 +1,24 @@
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 
+// all fields
 const colIncTitle = document.getElementById('overView-income-title')
 const colBillTitle = document.getElementById('overView-bill-title')
 
 const colIncBar = document.getElementById('overView-income-bar')
 const colBillBar = document.getElementById('overView-bill-bar')
 
+// All buttons
 const cancelButton = document.getElementById('cancel');
 
+// All eventListeners
 cancelButton.addEventListener("click", backToHome)
 
-function backToHome() {
-    console.log("pressed to go back home")
-    window.location = "../../Home.html";
-}
 
 generateOverviewIncome()
 generateOverviewBill()
 
 
+// Generates the bars based on the user data
 function generateOverviewIncome() {
     for (let i = 0; i < logedInUser.listOfCategoryIncome.length; i++) {
         let categoryElement = logedInUser.listOfCategoryIncome[i];
@@ -74,4 +74,10 @@ function generateOverviewBill() {
     }
 
 
+}
+
+
+// Back to main page
+function backToHome() {
+    window.location = "../../Home.html";
 }

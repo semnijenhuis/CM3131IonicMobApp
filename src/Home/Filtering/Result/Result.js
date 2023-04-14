@@ -1,9 +1,12 @@
-const backHomeButton = document.getElementById('goBackHome')
-
+// All lists
 const totalBillList = document.getElementById('totalBillList')
 const totalIncomeList = document.getElementById('totalIncomeList')
 
+// All buttons
+const backHomeButton = document.getElementById('goBackHome')
 
+
+// all input fields
 const CURID1 = document.getElementById('currencyResultID1')
 const CURID2 = document.getElementById('currencyResultID2')
 const CURID3 = document.getElementById('currencyResultID3')
@@ -14,7 +17,6 @@ const totalIncome = document.getElementById('total-income')
 const totalBills = document.getElementById('total-bills')
 const totalResult = document.getElementById('total-result')
 
-console.log("Result file started")
 backHomeButton.addEventListener("click", backToHome)
 
 
@@ -22,21 +24,8 @@ generateIncomingList()
 generateBillList()
 setInfo()
 
-function setInfo() {
-    let logedInUser = JSON.parse(localStorage.getItem("user"));
 
-    CURID1.innerText = logedInUser.currency
-    CURID2.innerText = logedInUser.currency
-    CURID3.innerText = logedInUser.currency
-    CURID4.innerText = logedInUser.currency
-
-    totalBank.innerText = logedInUser.bankAccount;
-    totalIncome.innerText = logedInUser.income;
-    totalBills.innerText = logedInUser.debt;
-    totalResult.innerText = logedInUser.result;
-
-}
-
+// Generates the list based on the user data
 function generateIncomingList() {
 
     let logedInUser = JSON.parse(localStorage.getItem("user"));
@@ -127,7 +116,22 @@ function generateBillList() {
 }
 
 
+// Sets result information
+function setInfo() {
+    let logedInUser = JSON.parse(localStorage.getItem("user"));
+
+    CURID1.innerText = logedInUser.currency
+    CURID2.innerText = logedInUser.currency
+    CURID3.innerText = logedInUser.currency
+    CURID4.innerText = logedInUser.currency
+
+    totalBank.innerText = logedInUser.bankAccount;
+    totalIncome.innerText = logedInUser.income;
+    totalBills.innerText = logedInUser.debt;
+    totalResult.innerText = logedInUser.result;
+
+}
+
 function backToHome() {
-    console.log("pressed to go back home")
     window.location = "./../Home.html";
 }

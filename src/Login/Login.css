@@ -8,29 +8,30 @@
     padding: 5px;
     --background: #738693;
 }
+
 .register-btn {
     --background: #7C9CAB;
 }
 
-.icon-btn{
+.icon-btn {
     --background: #00ff00;
 }
 
-.centerRowItem{
+.centerRowItem {
     justify-content: space-evenly
 }
 
-.centerText{
+.centerText {
     text-align: center;
 }
 
-.padding{
+.padding {
     padding: 10px;
     height: 380px;
 
 }
 
-.modalStyle{
+.modalStyle {
     --background: rgba(0, 0, 0, 0);
     padding: 10px;
 

@@ -2,7 +2,7 @@ class Category {
 
     name;
     amount = 0;
-    percentage= 0;
+    percentage = 0;
 
     constructor(name) {
         this.name = name;
@@ -17,8 +17,8 @@ class Category {
         };
     }
 
-
 }
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Category;
 }

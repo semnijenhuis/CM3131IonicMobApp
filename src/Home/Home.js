@@ -1,68 +1,46 @@
-// Home screen
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 
-const greetingName = document.getElementById('lbl-greeting');
-const balanceName = document.getElementById('lbl-balance');
+// All list
+const billList = document.getElementById('billList')
+const billIncomeList = document.getElementById('bill-incomeList')
+
+
+// All buttons
 const logOut = document.getElementById('settings-logOut-btn');
+const overviewBtn = document.getElementById('settings-Overview-btn');
+const apiBtn = document.getElementById('settings-API-btn');
 const filterButton = document.getElementById('startFilter');
 
 
-// Bills screen
-
+// All fields
+const billsIncome = document.getElementById('bills-income')
+const billsBills = document.getElementById('bills-bills')
+const billsResult = document.getElementById('bills-result')
+const greetingName = document.getElementById('lbl-greeting');
+const balanceName = document.getElementById('lbl-balance');
+const billsBankAccount = document.getElementById('bills-bankaccount')
 const CURID1 = document.getElementById('currencyID1')
 const CURID2 = document.getElementById('currencyID2')
 const CURID3 = document.getElementById('currencyID3')
 const CURID4 = document.getElementById('currencyID4')
 
-const billsBankAccount = document.getElementById('bills-bankaccount')
-const billsIncome = document.getElementById('bills-income')
-const billsBills = document.getElementById('bills-bills')
-const billsResult = document.getElementById('bills-result')
-const billList = document.getElementById('billList')
-const billIncomeList = document.getElementById('bill-incomeList')
+// All eventListeners
+logOut.addEventListener("click", deleteUser);
+overviewBtn.addEventListener('click', () => {
+    window.location.href = 'Settings/Overview/Overview.html'
+});
+apiBtn.addEventListener('click', () => {
+    window.location.href = 'Settings/API/Api.html'
+});
+filterButton.addEventListener("click", startFilter);
 
 
-
-const overviewBtn = document.getElementById('settings-Overview-btn');
-const apiBtn = document.getElementById('settings-API-btn');
-
-    logOut.addEventListener("click", deleteUser);
-
-    overviewBtn.addEventListener('click', () => {
-        window.location.href = 'Settings/Overview/Overview.html'
-    });
-
-    apiBtn.addEventListener('click', () => {
-        window.location.href = 'Settings/API/Api.html'
-    });
-
-    filterButton.addEventListener("click", startFilter);
-
-    billsBankAccount.innerText = logedInUser.bankAccount
-
-
-
-
-
-
-
-
-
-
-
-console.log("Home file started")
-
-
-
-function startFilter() {
-    window.location.href = "Filtering/Filtering.html";
-}
-
-
+billsBankAccount.innerText = logedInUser.bankAccount
 generateBillList()
 generateIncomingList()
 
 
+// Generates the lists
 function generateBillList() {
     // create the titles row
     let titlesRow = document.createElement("ion-row");
@@ -194,6 +172,7 @@ function generateIncomingList() {
 }
 
 
+// Adds bill info if payed or not
 function addDebt(event, logedInUser, bill,) {
 
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
@@ -236,6 +215,16 @@ function addIncome(event, logedInUser, bill,) {
 }
 
 
+// Extra functions to log out and start the system
+function deleteUser() {
+    localStorage.removeItem('user');
+    window.location = "../Index.html";
+}
+
+function startFilter() {
+    window.location.href = "Filtering/Filtering.html";
+}
+
 function updateHeader() {
     let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
     user.bankAccount = logedInUser.bankAccount
@@ -261,38 +250,7 @@ function updateHeader() {
 }
 
 
-function deleteUser() {
-    localStorage.removeItem('user');
-    window.location = "../Index.html";
-}
 
-
-// animatie progressbar
-const progressBar = document.getElementById('progressbar');
-animateProgressBar(progressBar, 75, 1000);
-
-function animateProgressBar(progressBar, percentage, duration) {
-    if (progressBar !== null) {
-        const startValue = parseFloat(progressBar.getAttribute('value') || '0');
-        const endValue = percentage / 100;
-        const startTime = performance.now();
-
-        function animate(currentTime) {
-            const elapsedTime = currentTime - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-            const value = startValue + progress * (endValue - startValue);
-
-            progressBar.setAttribute('value', value);
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-}
 
 
 

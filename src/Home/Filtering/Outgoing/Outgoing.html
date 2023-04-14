@@ -11,26 +11,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
 
     <link rel="stylesheet">
-
 </head>
 <body>
-
-
-
-
+<!--        Header with image in it-->
 <ion-header>
     <ion-toolbar class="Global-Header">
         <ion-buttons slot="start">
             <ion-back-button text="" class="Global-BackButton"></ion-back-button>
         </ion-buttons>
-        <ion-title>Bills</ion-title>
+        <ion-img class="smallImage" src="../../Image/billImage.svg"></ion-img>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="Global-BackGround">
 
-<!--    <ion-button class="Global-Button" id="outgoing-addBill-btn" expand="block">New Bill</ion-button>-->
-
+    <!--        Modal that opens when new bill wants to create-->
     <ion-modal id="outgoing-newBill-modal" trigger="outgoing-addBill-btn">
 
         <ion-header>
@@ -80,6 +75,7 @@
         </ion-content>
     </ion-modal>
 
+    <!--        Modal that opens when bill needs to be edit-->
     <ion-modal id="outgoing-edit-newBill-modal">
 
         <ion-header>
@@ -134,7 +130,7 @@
         </ion-content>
     </ion-modal>
 
-
+    <!--        Overview of all debt-->
     <ion-card class="contentCard">
         <ion-card-content>
 
@@ -148,16 +144,16 @@
             </ion-list>
 
         </ion-card-content>
-
     </ion-card>
 
+    <!--        Bottom button to continue-->
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-fab-button  class="Global-Button" href="#/three">
             <ion-icon name="arrow-forward"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
-
+    <!--        Bottom button to add new income-->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button  class="Global-Button" id="outgoing-addBill-btn">
             <ion-icon name="add"></ion-icon>

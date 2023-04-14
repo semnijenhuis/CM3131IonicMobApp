@@ -20,10 +20,10 @@
 
 <ion-app>
 
-
     <ion-tabs id="tb-menu" selectedTab="tb-btn-home">
 
 
+        <!--        Home screen-->
         <ion-tab id="tb-btn-home" tab="Home">
 
 
@@ -42,7 +42,7 @@
             </ion-content>
         </ion-tab>
 
-        <!--        settingsScreen-->
+        <!--        Settings screen-->
         <ion-tab id="tb-btn-settings" tab="Settings">
 
             <ion-toolbar class="Global-Header">
@@ -63,10 +63,12 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
+                <ion-img class="smallImageBottom" src="../Image/settingsImage.svg"></ion-img>
             </ion-content>
 
         </ion-tab>
 
+        <!--        Bill screen-->
         <ion-tab id="tb-btn-settings" tab="Bills">
 
             <ion-toolbar class="Global-Header">
@@ -137,6 +139,7 @@
         </ion-tab>
 
 
+        <!--        Bottom menu bar-->
         <ion-tab-bar class="" slot="bottom">
 
             <ion-tab-button class="backgroundColor" tab="Settings">

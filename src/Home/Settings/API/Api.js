@@ -1,6 +1,10 @@
 let logedInUser = JSON.parse(localStorage.getItem("user"));
 
+let valutEuoToPound = 2;
+let valutaPoundToEuro = 0.5;
+
 const cancelButton = document.getElementById('cancel');
+const currencySwitch = document.getElementById('currencySwitch')
 
 const nameCol = document.getElementById('inflationcol-name')
 const curCol = document.getElementById('inflationcol-current')
@@ -11,8 +15,20 @@ const curColYear = document.getElementById('inflationcol-current-year')
 const futColYear = document.getElementById('inflationcol-future-year')
 
 
+cancelButton.addEventListener("click", backToHome)
+currencySwitch.addEventListener("ionChange", function (event) {
+    const isChecked = event.detail.checked;
+    switchCurrency(isChecked)
+});
+
+// euroToPound()
+// poundToEuro()
+
 generateInfTableMonth();
 generateInfTableYear();
+currencyCheck()
+
+
 
 
 async function generateInfTableMonth() {
@@ -30,7 +46,7 @@ async function generateInfTableMonth() {
             curCol.appendChild(curColItem);
 
             let furColItem = document.createElement("p");
-            furColItem.innerText = logedInUser.currency + " " + inflationYearCal(foundcategory.amount, inflationRate);
+            furColItem.innerText = logedInUser.currency + " " + inflationMonthCal(foundcategory.amount, inflationRate);
             futCol.appendChild(furColItem);
         }
     } catch (error) {
@@ -61,27 +77,12 @@ async function generateInfTableYear() {
     }
 }
 
-function getInflationRate() {
-}
 
-
-cancelButton.addEventListener("click", backToHome)
-
-const currencySwitch = document.getElementById('currencySwitch')
-
-
-currencyCheck()
-
-
-currencySwitch.addEventListener("ionChange", function (event) {
-    const isChecked = event.detail.checked;
-    switchCurrency(isChecked)
-});
-
-function inflationMonthCal(price) {
+// Calculates inflation
+function inflationMonthCal(price, inflationRate) {
     let numb = 0.00;
 
-    numb = price * 1.4
+    numb = price + (price * inflationRate / 100)
 
     return numb.toFixed(2);
 
@@ -94,101 +95,6 @@ function inflationYearCal(price, inflationRate) {
 
     return numb.toFixed(2);
 
-}
-
-
-function switchCurrency(bool) {
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
-    user.bankAccount = logedInUser.bankAccount
-    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
-    user.listOfCategoryBill = logedInUser.listOfCategoryBill
-
-    console.log(bool)
-
-    if (bool) {
-        console.log("switch to pound")
-        user.switchCurrency("Pound", 2);
-    } else {
-        console.log("switch to pound")
-        user.switchCurrency("Euro", 0.5);
-
-    }
-
-    localStorage.setItem("user", JSON.stringify(user));
-    // window.location.reload();
-
-}
-
-function currencyCheck() {
-    if (logedInUser.currency == "€") {
-        console.log("its euro")
-        currencySwitch.checked = false;
-    } else if (logedInUser.currency == "£") {
-        console.log("its pound")
-        currencySwitch.checked = true;
-    } else {
-        console.log("couldnt find currency" + logedInUser.currency)
-    }
-
-    // currencySwitch.checked = logedInUser.currency === "£";
-}
-
-
-function backToHome() {
-    console.log("pressed to go back home")
-    window.location = "../../Home.html";
-}
-
-function euroToPound(amount) {
-    let outcome;
-    let numb = parseInt(amount);
-    let myHeaders = new Headers();
-    myHeaders.append("apikey", "IUV1s5W2F3a8jDYnuOSmUzcNv970Phcj");
-    let requestOptions = {
-        method: "GET",
-        redirect: "follow",
-        headers: myHeaders,
-    };
-    fetch(
-        `https://api.apilayer.com/exchangerates_data/convert?to=GBP&from=EUR&amount=${numb}`,
-        requestOptions
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            outcome = data.result;
-            console.log(outcome);
-        })
-        .catch((error) => console.log("error", error));
-
-    console.log(outcome)
-
-    return outcome;
-}
-
-function poundToEuro(amount) {
-    let outcome;
-    let numb = parseInt(amount);
-    let myHeaders = new Headers();
-    myHeaders.append("apikey", "IUV1s5W2F3a8jDYnuOSmUzcNv970Phcj");
-    let requestOptions = {
-        method: "GET",
-        redirect: "follow",
-        headers: myHeaders,
-    };
-    fetch(
-        `https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=GBP&amount=${numb}`,
-        requestOptions
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            outcome = data.result;
-            console.log(outcome);
-        })
-        .catch((error) => console.log("error", error));
-
-    console.log(outcome)
-
-    return outcome;
 }
 
 function inflationMonth(country) {
@@ -211,9 +117,7 @@ function inflationMonth(country) {
             console.log(result);
             let monthly = result[0].monthly_rate_pct;
             let yearly = result[0].yearly_rate_pct;
-            console.log(monthly)
-            console.log(yearly)
-            console.log(result)
+
             return monthly;
         })
         .catch(error => {
@@ -242,9 +146,6 @@ function inflationYear(country) {
             console.log(result);
             let monthly = result[0].monthly_rate_pct;
             let yearly = result[0].yearly_rate_pct;
-            console.log(monthly)
-            console.log(yearly)
-            console.log(result)
             return yearly;
         })
         .catch(error => {
@@ -252,3 +153,100 @@ function inflationYear(country) {
             return null;
         });
 }
+
+
+// Calculate conversion valuta
+
+function switchCurrency(bool) {
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
+    user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
+    if (bool) {
+
+        user.switchCurrency("Pound", valutEuoToPound);
+    } else {
+
+        user.switchCurrency("Euro", valutaPoundToEuro);
+
+    }
+
+    localStorage.setItem("user", JSON.stringify(user));
+    // window.location.reload();
+
+}
+
+function euroToPound()   {
+    let amount = 1;
+    let outcome;
+    let numb = parseInt(amount);
+    let myHeaders = new Headers();
+    myHeaders.append("apikey", "IUV1s5W2F3a8jDYnuOSmUzcNv970Phcj");
+    let requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+    };
+    fetch(
+        `https://api.apilayer.com/exchangerates_data/convert?to=GBP&from=EUR&amount=${numb}`,
+        requestOptions
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            outcome = data.result;
+            console.log(outcome);
+        })
+        .catch((error) => console.log("error", error));
+
+    console.log(outcome)
+    valutEuoToPound = outcome;
+
+}
+
+function poundToEuro() {
+    let amount = 1;
+    let outcome;
+    let numb = parseInt(amount);
+    let myHeaders = new Headers();
+    myHeaders.append("apikey", "IUV1s5W2F3a8jDYnuOSmUzcNv970Phcj");
+    let requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+    };
+    fetch(
+        `https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=GBP&amount=${numb}`,
+        requestOptions
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            outcome = data.result;
+            console.log(outcome);
+        })
+        .catch((error) => console.log("error", error));
+
+    console.log(outcome)
+
+    valutaPoundToEuro = outcome;
+}
+
+function currencyCheck() {
+    if (logedInUser.currency === "€") {
+
+        currencySwitch.checked = false;
+    } else if (logedInUser.currency === "£") {
+
+        currencySwitch.checked = true;
+    } else {
+        console.log("couldnt find currency" + logedInUser.currency)
+    }
+}
+
+function backToHome() {
+    window.location = "../../Home.html";
+}
+
+
+
+

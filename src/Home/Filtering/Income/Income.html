@@ -16,7 +16,7 @@
 <body>
 <ion-app>
 
-
+    <!--        Header with image in it-->
     <ion-header>
         <ion-toolbar class="Global-Header">
             <ion-buttons slot="start">
@@ -24,33 +24,28 @@
                     <ion-icon class="Global-BackButton" slot="start" name="arrow-back"></ion-icon>
                 </ion-button>
             </ion-buttons>
-            <ion-title>Incoming list</ion-title>
+            <ion-img class="smallImage" src="../../Image/incomeImage.svg"></ion-img>
         </ion-toolbar>
     </ion-header>
 
     <ion-content class="Global-BackGround">
 
+        <!--        Card where user puts in his balance-->
         <ion-card class="contentCard">
 
             <ion-card-header>
-                <ion-card-title>Bank Account </ion-card-title>
+                <ion-card-title>Bank Account</ion-card-title>
             </ion-card-header>
             <ion-card-content>
 
                 <ion-label position="stacked"></ion-label>
-                <ion-input id="income-edit-bill-bankBalance" type="number" label="Balance:"
-                           placeholder="Amount"></ion-input>
-
-
+                <ion-input id="income-edit-bill-bankBalance" type="number" label="Balance:" placeholder="Amount"></ion-input>
 
             </ion-card-content>
-
         </ion-card>
 
-
-
-
-        <ion-modal  id="income-newBill-modal" trigger="income-addIncome-btn">
+        <!--        Modal that opens when new bill wants to create-->
+        <ion-modal id="income-newBill-modal" trigger="income-addIncome-btn">
 
 
             <ion-header>
@@ -81,7 +76,8 @@
                         </ion-item>
                         <ion-item>
                             <ion-label position="stacked"></ion-label>
-                            <ion-input id="income-bill-amount" type="number" label="Amount" placeholder="Amount"></ion-input>
+                            <ion-input id="income-bill-amount" type="number" label="Amount"
+                                       placeholder="Amount"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label position="stacked"></ion-label>
@@ -89,14 +85,16 @@
                         </ion-item>
                         <ion-item>
                             <ion-label></ion-label>
-                            <ion-select id="categoryList" label="categoryList" placeholder="Select a category"></ion-select>
+                            <ion-select id="categoryList" label="categoryList"
+                                        placeholder="Select a category"></ion-select>
                         </ion-item>
-                        </ion-card-content>
+                    </ion-card-content>
                 </ion-card>
 
             </ion-content>
         </ion-modal>
 
+        <!--        Modal that opens when bill needs to be edit-->
         <ion-modal id="income-edit-newBill-modal">
 
             <ion-header>
@@ -113,7 +111,6 @@
             </ion-header>
 
 
-
             <ion-content class="Global-BackGround">
 
                 <ion-card>
@@ -124,12 +121,14 @@
                     <ion-card-content>
                         <ion-item>
                             <ion-label position="stacked"></ion-label>
-                            <ion-input id="income-edit-bill-id" type="text" label="ID" placeholder="ID" readonly></ion-input>
+                            <ion-input id="income-edit-bill-id" type="text" label="ID" placeholder="ID"
+                                       readonly></ion-input>
                         </ion-item>
 
                         <ion-item>
                             <ion-label position="stacked"></ion-label>
-                            <ion-input id="income-edit-bill-name" type="text" label="Name" placeholder="Name"></ion-input>
+                            <ion-input id="income-edit-bill-name" type="text" label="Name"
+                                       placeholder="Name"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label position="stacked"></ion-label>
@@ -154,7 +153,7 @@
             </ion-content>
         </ion-modal>
 
-
+        <!--        Overview of all income-->
         <ion-card class="contentCard">
             <ion-card-content>
 
@@ -166,25 +165,23 @@
 
 
                 </ion-list>
-
             </ion-card-content>
 
         </ion-card>
 
-
-
+        <!--        Bottom button to continue-->
         <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-            <ion-fab-button  class="Global-Button" href="#/two">
+            <ion-fab-button class="Global-Button" href="#/two">
                 <ion-icon name="arrow-forward"></ion-icon>
             </ion-fab-button>
         </ion-fab>
 
+        <!--        Bottom button to add new income-->
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-fab-button  class="Global-Button" id="income-addIncome-btn" >
+            <ion-fab-button class="Global-Button" id="income-addIncome-btn">
                 <ion-icon name="add"></ion-icon>
             </ion-fab-button>
         </ion-fab>
-
 
     </ion-content>
 </ion-app>

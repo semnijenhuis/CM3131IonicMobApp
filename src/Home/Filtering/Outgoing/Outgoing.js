@@ -1,46 +1,45 @@
-console.log("outgoing file started")
-
 let selectedCategoryOutgoing;
 
+// All lists
 const outgoingBillList = document.getElementById('outgoing-incomeList')
+const categoryListOutgoing = document.getElementById('categoryListOutgoing')
+const categoryListOutgoingEdit = document.getElementById('categoryListOutgoingEdit')
 
+// All modals
 const addOutgoingModal = document.getElementById('outgoing-newBill-modal')
 const editOutgoingModal = document.getElementById('outgoing-edit-newBill-modal')
 
+// All buttons
 const outgoingConfirmButton = document.getElementById('outgoing-confirm-btn')
 const outgoingCancelButton = document.getElementById('outgoing-cancel-btn')
-
 const outgoingEditConfirmButton = document.getElementById('outgoing-edit-confirm-btn')
 const outgoingEditCancelButton = document.getElementById('outgoing-edit-cancel-btn')
 
+// all input fields
 const outgoingBillNameInput = document.getElementById('outgoing-bill-name');
 const outgoingBillAmountInput = document.getElementById('outgoing-bill-amount');
 const outgoingBillDateInput = document.getElementById('outgoing-bill-date');
-const outgoingBillCategoryInput = document.getElementById('outgoing-bill-category');
-
 const outgoingBillEditIDInput = document.getElementById('outgoing-edit-bill-id');
 const outgoingBillEditNameInput = document.getElementById('outgoing-edit-bill-name');
 const outgoingBillEditAmountInput = document.getElementById('outgoing-edit-bill-amount');
 const outgoingBillEditDateInput = document.getElementById('outgoing-edit-bill-date');
-const outgoingBillEditCategoryInput = document.getElementById('outgoing-edit-bill-category');
 
 
 outgoingConfirmButton.addEventListener("click", billConfirmed)
 outgoingCancelButton.addEventListener("click", billCancel)
-
-
 outgoingEditConfirmButton.addEventListener("click", editBillConfirmed)
 outgoingEditCancelButton.addEventListener("click", editBillCancel)
+categoryListOutgoing.addEventListener('ionChange', (event) => {
+    // get the selected option's value
+    selectedCategoryOutgoing = event.target.value;
+});
 
-
-const categoryListOutgoing = document.getElementById('categoryListOutgoing')
-const categoryListOutgoingEdit = document.getElementById('categoryListOutgoingEdit')
 
 generateBillList();
 generateCategoryOutgoing()
 generateCategoryOutgoingEdit();
 
-
+// Generates the list based on the user data
 function generateCategoryOutgoing() {
     for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
         let categoryElement = logedInUser.listOfCategoryBill[i];
@@ -48,15 +47,10 @@ function generateCategoryOutgoing() {
         ionItem.innerText = categoryElement.name;
         ionItem.value = categoryElement.name;
         categoryListOutgoing.appendChild(ionItem);
-
     }
-
 }
 
-
 function generateCategoryOutgoingEdit() {
-
-
     for (let i = 0; i < logedInUser.listOfCategoryBill.length; i++) {
         let categoryElement = logedInUser.listOfCategoryBill[i];
         let ionItem = document.createElement("ion-select-option");
@@ -64,101 +58,7 @@ function generateCategoryOutgoingEdit() {
         ionItem.value = categoryElement.name;
         categoryListOutgoingEdit.appendChild(ionItem);
     }
-
 }
-
-
-function billConfirmed() {
-
-    let storageUser = JSON.parse(localStorage.getItem("user"));
-
-    let user = new User(storageUser.username, storageUser.password, storageUser.listOfIncome, storageUser.listOfBills, storageUser.currency)
-    user.bankAccount = logedInUser.bankAccount
-    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
-    user.listOfCategoryBill = logedInUser.listOfCategoryBill
-
-    newBill = new Bill(outgoingBillNameInput.value, outgoingBillAmountInput.value, outgoingBillDateInput.value, selectedCategoryOutgoing)
-
-    if (!newBill.checkBill()) {
-
-        user.addBill(newBill)
-
-        localStorage.setItem("user", JSON.stringify(user));
-
-
-        refreshIncomeList()
-
-        addOutgoingModal.dismiss();
-    }
-
-
-}
-
-function billCancel() {
-    console.log("pressed no")
-    addOutgoingModal.dismiss();
-
-}
-
-
-function editBillConfirmed() {
-
-    let storageUser = JSON.parse(localStorage.getItem("user"));
-
-    newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, selectedCategoryOutgoing)
-    newBill.id = outgoingBillEditIDInput.value;
-    if (!newBill.checkBill()) {
-        editBill(newBill)
-
-        localStorage.setItem("user", JSON.stringify(storageUser));
-
-
-        refreshIncomeList()
-
-        editOutgoingModal.dismiss();
-    }
-
-
-}
-
-
-function editBillCancel() {
-    console.log("pressed no")
-    editOutgoingModal.dismiss();
-}
-
-
-function deleteBill(billToDelete) {
-    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
-    user.bankAccount = logedInUser.bankAccount
-    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
-    user.listOfCategoryBill = logedInUser.listOfCategoryBill
-
-    user.deleteOutgoingBill(billToDelete)
-
-
-    // save the updated user object back to local storage
-    localStorage.setItem("user", JSON.stringify(logedInUser));
-    refreshIncomeList();
-}
-
-function editBill(billToEdit) {
-
-    let storageUser = JSON.parse(localStorage.getItem("user"));
-    // Iterate through the listOfBills array
-    storageUser.listOfBills.forEach((bill, index) => {
-        // If the bill has the same id as billToEdit, update it
-        if (bill.id === billToEdit.id) {
-            storageUser.listOfBills[index] = billToEdit;
-        }
-    });
-
-    // save the updated user object back to local storage
-    localStorage.setItem("user", JSON.stringify(storageUser));
-
-    refreshIncomeList();
-}
-
 
 function generateBillList() {
 
@@ -193,7 +93,7 @@ function generateBillList() {
         let editButton = document.createElement("ion-button");
         editButton.setAttribute("id", "editBill" + i);
         editButton.classList.add("small-button"); // add class for styling
-        editButton.addEventListener("click", function() {
+        editButton.addEventListener("click", function () {
             openActionSheet(bill);
         });
 
@@ -222,8 +122,90 @@ function generateBillList() {
     }
 
 
+}
 
 
+// Creates a new bill
+function billConfirmed() {
+
+    let storageUser = JSON.parse(localStorage.getItem("user"));
+
+    let user = new User(storageUser.username, storageUser.password, storageUser.listOfIncome, storageUser.listOfBills, storageUser.currency)
+    user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
+    newBill = new Bill(outgoingBillNameInput.value, outgoingBillAmountInput.value, outgoingBillDateInput.value, selectedCategoryOutgoing)
+
+    if (!newBill.checkBill()) {
+        user.addBill(newBill)
+        localStorage.setItem("user", JSON.stringify(user));
+        refreshIncomeList()
+        addOutgoingModal.dismiss();
+    }
+
+
+}
+
+function editBillConfirmed() {
+
+    let storageUser = JSON.parse(localStorage.getItem("user"));
+
+    newBill = new Bill(outgoingBillEditNameInput.value, outgoingBillEditAmountInput.value, outgoingBillEditDateInput.value, selectedCategoryOutgoing)
+    newBill.id = outgoingBillEditIDInput.value;
+    if (!newBill.checkBill()) {
+        editBill(newBill)
+        localStorage.setItem("user", JSON.stringify(storageUser));
+        refreshIncomeList()
+        editOutgoingModal.dismiss();
+    }
+}
+
+
+// Deletes a new bill
+function deleteBill(billToDelete) {
+    let user = new User(logedInUser.username, logedInUser.password, logedInUser.listOfIncome, logedInUser.listOfBills, logedInUser.currency)
+    user.bankAccount = logedInUser.bankAccount
+    user.listOfCategoryIncome = logedInUser.listOfCategoryIncome
+    user.listOfCategoryBill = logedInUser.listOfCategoryBill
+
+    user.deleteOutgoingBill(billToDelete)
+
+    localStorage.setItem("user", JSON.stringify(logedInUser));
+    refreshIncomeList();
+}
+
+function editBill(billToEdit) {
+
+    let storageUser = JSON.parse(localStorage.getItem("user"));
+    // Iterate through the listOfBills array
+    storageUser.listOfBills.forEach((bill, index) => {
+        // If the bill has the same id as billToEdit, update it
+        if (bill.id === billToEdit.id) {
+            storageUser.listOfBills[index] = billToEdit;
+        }
+    });
+
+    // save the updated user object back to local storage
+    localStorage.setItem("user", JSON.stringify(storageUser));
+    refreshIncomeList();
+}
+
+
+// Cancels the option to create a bill
+function billCancel() {
+    addOutgoingModal.dismiss();
+}
+
+function editBillCancel() {
+    editOutgoingModal.dismiss();
+}
+
+
+// Refresh list and edit a bill
+function refreshIncomeList() {
+    outgoingBillList.innerHTML = ""; // clear the current list
+    generateBillList(); // call the function to generate the updated list
 }
 
 function openActionSheet(bill) {
@@ -247,7 +229,6 @@ function openActionSheet(bill) {
                 outgoingBillEditDateInput.value = formattedDate;
                 categoryListOutgoingEdit.value = bill.category;
 
-                console.log(bill)
                 editOutgoingModal.present();
             }
         },
@@ -279,14 +260,3 @@ function openActionSheet(bill) {
     actionSheet.present();
 
 }
-
-function refreshIncomeList() {
-    outgoingBillList.innerHTML = ""; // clear the current list
-    generateBillList(); // call the function to generate the updated list
-}
-
-categoryListOutgoing.addEventListener('ionChange', (event) => {
-    // get the selected option's value
-    selectedCategoryOutgoing = event.target.value;
-    console.log(selectedCategoryOutgoing);
-});

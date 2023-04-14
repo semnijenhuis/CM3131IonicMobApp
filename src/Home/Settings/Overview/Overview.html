@@ -18,6 +18,8 @@
 <body>
 
 <ion-app>
+
+    <!--        Header with image in it-->
     <ion-header>
         <ion-toolbar class="Global-Header">
             <ion-buttons slot="start">
@@ -25,13 +27,14 @@
                     <ion-icon class="Global-BackButton" slot="start" name="arrow-back"></ion-icon>
                 </ion-button>
             </ion-buttons>
-            <ion-title>Category overview</ion-title>
+            <ion-img class="smallImage" src="../../../Image/overViewImage.svg"></ion-img>
         </ion-toolbar>
     </ion-header>
 
 
     <ion-content class="Global-BackGround">
 
+        <!--        Overview of all income in bars-->
         <ion-card class="contentCard">
 
             <ion-card-header>
@@ -52,6 +55,7 @@
             </ion-card-content>
         </ion-card>
 
+        <!--        Overview of all debt in bar-->
         <ion-card class="contentCard">
 
             <ion-card-header>
@@ -71,6 +75,7 @@
                 </ion-grid>
             </ion-card-content>
         </ion-card>
+
     </ion-content>
 
 

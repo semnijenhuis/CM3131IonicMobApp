@@ -1,4 +1,3 @@
-
 class Bill {
 
     id;
@@ -7,8 +6,6 @@ class Bill {
     date;
     category;
     payed;
-
-
 
     constructor(name, amount, date, category) {
         this.id = Date.now();
@@ -20,7 +17,6 @@ class Bill {
     }
 
     checkBill() {
-
         if (
             this.name === "" || this.name === null ||
             this.amount === "" || this.amount === null ||
@@ -42,8 +38,8 @@ class Bill {
         };
     }
 
-
 }
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Bill;
 }

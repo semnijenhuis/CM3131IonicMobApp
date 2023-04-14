@@ -17,6 +17,8 @@
 
 <body>
 <ion-app>
+
+    <!--        Header with image in it-->
     <ion-header>
         <ion-toolbar class="Global-Header">
             <ion-buttons slot="start">
@@ -24,14 +26,13 @@
                     <ion-icon class="Global-BackButton" slot="start" name="arrow-back"></ion-icon>
                 </ion-button>
             </ion-buttons>
-            <ion-title>Api Calls</ion-title>
+            <ion-img class="smallImage" src="../../../Image/apiCallImage.svg"></ion-img>
         </ion-toolbar>
     </ion-header>
 
-
     <ion-content class="Global-BackGround">
 
-
+        <!--        Switch to euro/pound-->
         <ion-card>
             <ion-card-header>
                 <ion-card-title>Switch currency</ion-card-title>
@@ -41,7 +42,7 @@
             </ion-card-content>
         </ion-card>
 
-
+        <!--        Calculated inflation for a month-->
         <ion-card class="contentCard">
             <ion-card-content>
                 <ion-card-header>
@@ -67,6 +68,7 @@
             </ion-card-content>
         </ion-card>
 
+        <!--        Calculated inflation for a year-->
         <ion-card class="contentCard">
             <ion-card-content>
                 <ion-card-header>
@@ -91,6 +93,7 @@
                 </ion-grid>
             </ion-card-content>
         </ion-card>
+
     </ion-content>
 </ion-app>
 

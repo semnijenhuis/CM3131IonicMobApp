@@ -18,14 +18,13 @@ GlobalCss.rel = 'stylesheet';
 GlobalCss.href = '../../Components/GlobalStyle.css';
 
 
-
+// Income page
 customElements.define('page-one', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();
         this.loadScript();
         this.loadCss();
     }
-
 
 
     async loadContent() {
@@ -39,13 +38,14 @@ customElements.define('page-one', class classOne extends HTMLElement {
         document.head.appendChild(billScript);
         this.appendChild(incomeScript);
     }
+
     async loadCss() {
         document.head.appendChild(GlobalCss);
     }
 
 });
 
-
+// Outgoing page
 customElements.define('page-two', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();
@@ -65,7 +65,7 @@ customElements.define('page-two', class classOne extends HTMLElement {
     }
 });
 
-
+// Result page
 customElements.define('page-three', class classOne extends HTMLElement {
     connectedCallback() {
         this.loadContent();

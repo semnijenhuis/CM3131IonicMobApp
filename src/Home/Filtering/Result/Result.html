@@ -19,12 +19,13 @@
         <ion-buttons slot="start">
             <ion-back-button text="" class="Global-BackButton"></ion-back-button>
         </ion-buttons>
-        <ion-title>Result</ion-title>
+        <ion-img class="smallImage" src="../../Image/allBillOverview.svg"></ion-img>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="Global-BackGround">
 
+    <!--        Overview of calculated-->
     <ion-card>
         <ion-card-header>
             <ion-card-title id="title-animal">Overview</ion-card-title>
@@ -64,7 +65,7 @@
 
     </ion-card>
 
-
+    <!--        Overview of all income-->
     <ion-card class="contentCard">
         <ion-card-content>
 
@@ -81,6 +82,7 @@
 
     </ion-card>
 
+    <!--        Overview of all debt-->
     <ion-card class="contentCard">
         <ion-card-content>
 
@@ -97,8 +99,9 @@
 
     </ion-card>
 
+    <!--        Bottom button to complete-->
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button  class="Global-Button" id="goBackHome">
+        <ion-fab-button class="Global-Button" id="goBackHome">
             <ion-icon name="checkmark-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab>

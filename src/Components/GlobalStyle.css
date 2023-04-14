@@ -1,8 +1,8 @@
-.Global-BackGround{
+.Global-BackGround {
     --background: #F7ECE1;
 }
 
-.Global-Header{
+.Global-Header {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     height: 180px;
     display: flex;
@@ -11,7 +11,7 @@
     --background: #f8f3f3;
 }
 
-.Global-BackButton{
+.Global-BackButton {
     font-size: 1.2rem; /* adjust as needed */
     color: black;
     --padding-start: 10px; /* adjust as needed */
@@ -21,7 +21,7 @@
     --background-hover: rgba(0, 0, 0, 0.1); /* add hover background color */
 }
 
-.Global-Button{
+.Global-Button {
     vertical-align: middle;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     --background: #BCAFAE;
@@ -30,24 +30,36 @@
     --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.Global-Card{
+.Global-Card {
     --background: #ffffff;
     --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-.Global-Item{
+
+.Global-Item {
     --background: #ffffff;
 }
 
 .align-middle {
     vertical-align: middle;
 }
+
 .small-button {
     --background: #BCAFAE;
     height: 40px;
     font-size: 16px;
 }
 
+.smallImage {
 
-.income-edit-newBill-modal{
-    --background: green;
+    max-width: 40%;
+    margin: 0 auto;
+
+}
+
+.smallImageBottom {
+    max-width: 60%;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
