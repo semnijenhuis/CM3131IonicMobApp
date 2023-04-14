@@ -36,3 +36,5 @@ However, it's worth acknowledging that the convenience and accessibility of loca
 - student number:  2238165
 - [GitHub Repository](https://github.com/semnijenhuis/CM3131IonicMobApp)
 - [Adobe XD Prototype](https://xd.adobe.com/view/ff1d527a-c7c8-4c74-968f-3535f8bd6232-aa4e/)
+- [YouTube](https://youtu.be/ngX-nIEw8_o) (in case if the video somehow isn't accessible )
+-  
