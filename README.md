@@ -25,6 +25,6 @@ You can also view how much you're spending in specific categories by going to th
 By using this application to track expenses, you'll have a better understanding of your spending habits and can make informed decisions about your budget. By using the app consistently, you may be able to save more money and reach your financial goals.
 
 ## External Links
-
+- student number:  2238165
 - [GitHub Repository](https://github.com/semnijenhuis/CM3131IonicMobApp)
 - [Adobe XD Prototype](https://xd.adobe.com/view/ff1d527a-c7c8-4c74-968f-3535f8bd6232-aa4e/)
