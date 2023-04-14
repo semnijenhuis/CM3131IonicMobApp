@@ -22,7 +22,15 @@ You can also view how much you're spending in specific categories by going to th
 
 ## Results
 
+
+
 By using this application to track expenses, you'll have a better understanding of your spending habits and can make informed decisions about your budget. By using the app consistently, you may be able to save more money and reach your financial goals.
+
+## security
+As presentation time flew by faster than anticipated, I realized the need to explain security measures in some detail here. It's important to note that storing the user as a complete object within local storage is not the most secure method. If this application were to be launched, I would recommend using Firebase and implementing Google Authenticator to enhance login security.
+
+However, it's worth acknowledging that the convenience and accessibility of local storage make it a viable option for this project. Nonetheless, we should always prioritize the safety and protection of user information, and consider alternative options when you want to store user data.
+
 
 ## External Links
 - student number:  2238165
